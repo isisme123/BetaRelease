@@ -1,14 +1,15 @@
-package com.example.gofishgui;
+package com.example.gofishgui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class EndActivity extends AppCompatActivity {
+import com.example.gofishgui.R;
+
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_end);
+        setContentView(R.layout.activity_main);
     }
 }
