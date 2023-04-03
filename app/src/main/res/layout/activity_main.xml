@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="5sp">
+    android:paddingTop="5sp"
+    android:background="#0a6c03">
 
     <!-- The deck of cards in the middle -->
     <LinearLayout
@@ -18,42 +19,56 @@
             android:id="@+id/opponent_card1"
             android:layout_width="100dp"
             android:layout_height="150dp"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
             android:src="@drawable/cardback" />
 
         <ImageView
             android:id="@+id/opponent_card2"
             android:layout_width="100dp"
             android:layout_height="150dp"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
             android:src="@drawable/cardback" />
 
         <ImageView
             android:id="@+id/opponent_card3"
             android:layout_width="100dp"
             android:layout_height="150dp"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
             android:src="@drawable/cardback" />
 
         <ImageView
             android:id="@+id/opponent_card4"
             android:layout_width="100dp"
             android:layout_height="150dp"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
             android:src="@drawable/cardback" />
 
         <ImageView
             android:id="@+id/opponent_card5"
             android:layout_width="100dp"
             android:layout_height="150dp"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
             android:src="@drawable/cardback" />
 
         <ImageView
             android:id="@+id/opponent_card6"
             android:layout_width="100dp"
             android:layout_height="150dp"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
             android:src="@drawable/cardback" />
 
         <ImageView
             android:id="@+id/opponent_card7"
             android:layout_width="100dp"
             android:layout_height="150dp"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
             android:src="@drawable/cardback" />
 
     </LinearLayout>
@@ -87,42 +102,56 @@
             android:id="@+id/player_card1"
             android:layout_width="100dp"
             android:layout_height="150dp"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
             android:src="@drawable/cardback" />
 
         <ImageView
             android:id="@+id/player_card2"
             android:layout_width="100dp"
             android:layout_height="150dp"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
             android:src="@drawable/cardback" />
 
         <ImageView
             android:id="@+id/player_card3"
             android:layout_width="100dp"
             android:layout_height="150dp"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
             android:src="@drawable/cardback" />
 
         <ImageView
             android:id="@+id/player_card4"
             android:layout_width="100dp"
             android:layout_height="150dp"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
             android:src="@drawable/cardback" />
 
         <ImageView
             android:id="@+id/player_card5"
             android:layout_width="100dp"
             android:layout_height="150dp"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
             android:src="@drawable/cardback" />
 
         <ImageView
             android:id="@+id/player_card6"
             android:layout_width="100dp"
             android:layout_height="150dp"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
             android:src="@drawable/cardback" />
 
         <ImageView
             android:id="@+id/player_card7"
             android:layout_width="100dp"
             android:layout_height="150dp"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
             android:src="@drawable/cardback" />
 
     </LinearLayout>
