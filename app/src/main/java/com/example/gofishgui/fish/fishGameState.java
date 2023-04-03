@@ -1,7 +1,6 @@
 package com.example.gofishgui.fish;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class fishGameState {
     // Instance variables
@@ -30,7 +29,13 @@ public class fishGameState {
     }
 
     public fishGameState(fishGameState p) {
-
+        this.deck = p.deck;
+        this.humanHand = p.humanHand;
+        this.computerHand = p.computerHand;
+        this.currentPlayer = p.currentPlayer;
+        this.playerScore = p.playerScore;
+        this.opponentScore = p.opponentScore;
+        this.gameOver = p.gameOver;
     }
 
     public void startGame() {
