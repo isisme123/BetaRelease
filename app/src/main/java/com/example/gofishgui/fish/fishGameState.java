@@ -29,21 +29,68 @@ public class fishGameState {
 
     }
 
+    public fishGameState(fishGameState p) {
+
+    }
+
     public void startGame() {
 
     }
 
-    public void playGame() {
-
-    }
-
     public void nextPlayer() {
-
+        if(currentPlayer == 0) {
+            currentPlayer = 1;
+        }
+        else {
+            currentPlayer = 0;
+        }
     }
 
     public boolean isGamerOver() {
-
+        return gameOver;
     }
 
+    public List<FishCard> getDeck() {
+        return deck;
+    }
 
+    public List<FishCard> getHumanHand() {
+        return humanHand;
+    }
+
+    public List<FishCard> getComputerHand() {
+        return computerHand;
+    }
+
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public int getPlayerScore() {
+        return playerScore;
+    }
+
+    public int getOpponentScore() {
+        return opponentScore;
+    }
+
+    public void setDeck(List<FishCard> deck) {
+        this.deck = deck;
+    }
+
+    public void setHumanHand(List<FishCard> humanHand) {
+        this.humanHand = humanHand;
+    }
+
+    public void setComputerHand(List<FishCard> computerHand) {
+        this.computerHand = computerHand;
+    }
+
+    public void setPlayerScore(int playerScore) {
+        this.playerScore = playerScore;
+    }
+
+    public void setOpponentScore(int opponentScore) {
+        this.opponentScore = opponentScore;
+    }
 }
