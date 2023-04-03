@@ -63,6 +63,4 @@ public class FishDeck {
     public FishCard[] getComputerHand() {
         return computerHand;
     }
-
-
 }
