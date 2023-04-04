@@ -33,9 +33,11 @@ public class StartActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
                 switch(position) {
                     case 0:
+                        // Assign Dummy AI here, SOP for testing purposes
                         System.out.println("Dummy");
                         break;
                     case 1:
+                        // Assign Smart AI here, SOP for testing purposes
                         System.out.println("Smart");
                         break;
                 }

@@ -6,18 +6,23 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
+
 public class FishHand extends LinearLayout implements View.OnClickListener {
-    private Context c;
-    private ImageView[] pc;// image views for human cards
-    private Button[] b;
+    private Context c; // context
+    private ImageView[] pc; // image views for human cards
+    private Button[] b; // button array
+    private int value; // card value that was asked for
     private Button lastClickedButton;
+    ArrayList<FishCard> hand; // arraylist for the hand
 
     // FishHand constructor
-    public FishHand(Context c, ImageView[] pc, Button[] b) {
+    public FishHand(Context c, ImageView[] pc, Button[] b, ArrayList<FishCard> hand) {
         super(c);
         this.c = c;
         this.pc = pc;
         this.b = b;
+        this.hand = hand;
         for (int i = 0; i < pc.length; i++) {
             pc[i].setOnClickListener(this);
             b[i].setOnClickListener(this);
@@ -32,16 +37,28 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
         if (v instanceof ImageView) { // if card is clicked
             for (int i = 0; i < pc.length; i++) {
                 if (v == pc[i]) {
-                    b[i].setVisibility(VISIBLE);
+                    b[i].setVisibility(VISIBLE); // show a button
                     lastClickedButton = b[i];
                 } else {
                     b[i].setVisibility(INVISIBLE);
                 }
             }
-        } else if (v instanceof Button) {
+        } else if (v instanceof Button) { // if the button is clicked
             for (int i = 0; i < b.length; i++) {
-                if (v == b[i]) {
-                    // ASK FOR CARD METHOD
+                if (v == b[i]) { // go through button array and find card value that was asked for
+                    switch(i) {
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
+                            value = hand.get(i).getValue();
+                            // PRINTS VALUE CLICKED TO TEST, SOP can be removed later
+                            System.out.println(value); break;
+                    }
+                    // !! ASKFORCARD CALL HERE!!
                 }
             }
             lastClickedButton.setVisibility(INVISIBLE);

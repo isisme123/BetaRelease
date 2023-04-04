@@ -3,18 +3,15 @@ package com.example.gofishgui.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import com.example.gofishgui.R;
 import com.example.gofishgui.fish.FishCard;
 import com.example.gofishgui.fish.FishDeck;
 import com.example.gofishgui.fish.FishHand;
-
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,9 +20,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // FOR TESTING, will put the following into startGame method later
-        ImageView[] pc = new ImageView[7]; // image views for human cards array
-        Button[] b = new Button[pc.length]; // ask button array
+        // !! FOR TESTING, will put the following into startGame method later!!
+        // image views for human cards array
+        ImageView[] pc = new ImageView[7];
+        // ask button array
+        Button[] b = new Button[pc.length];
+        // populates button and imageview
         pc[0] = findViewById(R.id.player_card1);
         pc[1] = findViewById(R.id.player_card2);
         pc[2] = findViewById(R.id.player_card3);
@@ -40,34 +40,41 @@ public class MainActivity extends AppCompatActivity {
         b[4] = findViewById(R.id.askbutton5);
         b[5] = findViewById(R.id.askbutton6);
         b[6] = findViewById(R.id.askbutton7);
-
-        FishCard[] cards = new FishCard[52]; // generates 52 cards
-        FishDeck deck = new FishDeck(cards); // creates deck from cards
-        deck.shuffle(); // shuffles deck
-        deck.dealCards(); // deals cards
-        FishCard[] humanHand = deck.getHumanHand(); // gets human hand
-        FishCard[] computerHand = deck.getComputerHand(); // gets computer hand
-        updateHandImages(humanHand, pc); // updates images for human hand
-
-        FishHand humanPlayerHand = new FishHand(this, pc, b); // creates FishHand and buttons to ask
-        LinearLayout layout = findViewById(R.id.layout_main); // replace with the ID of your layout
+        // generates 52 cards
+        ArrayList<FishCard> cards = new ArrayList<>();
+        // creates deck from cards
+        FishDeck deck = new FishDeck(cards);
+        // shuffles cards
+        deck.shuffle();
+        // deals cards
+        deck.dealCards();
+        // gets human hand
+        ArrayList<FishCard> humanHand = deck.getHumanHand();
+        // gets computer hand
+        ArrayList<FishCard> computerHand = deck.getComputerHand();
+        // updates images for human hand
+        updateHandImages(humanHand, pc);
+        // creates FishHand and popup ask
+        FishHand humanPlayerHand = new FishHand(this, pc, b, humanHand);
+        LinearLayout layout = findViewById(R.id.layout_main);
         layout.addView(humanPlayerHand);
     }
 
     // Helper method that updates the images on the cards
-    public void updateHandImages(FishCard[] hand, ImageView[] imageViews) {
-        for (int i = 0; i < hand.length && i < imageViews.length; i++) {
-            // finds the file name
-            if (hand[i] != null) {
+    public void updateHandImages(ArrayList<FishCard> hand, ImageView[] imageViews) {
+        int numCards = hand.size();
+        for (int i = 0; i < imageViews.length; i++) {
+            if (i < numCards) {
+                FishCard card = hand.get(i);
                 String fileName = "";
-                switch (hand[i].getValue()) {
+                switch (card.getValue()) {
                     case 1: fileName += "ace"; break;
                     case 2: fileName += "two"; break;
                     case 3: fileName += "three"; break;
                     case 4: fileName += "four"; break;
                     case 5: fileName += "five"; break;
                     case 6: fileName += "six"; break;
-                    case 7: fileName += "seven"; break;
+                    case 7: fileName +=  "seven"; break;
                     case 8: fileName += "eight"; break;
                     case 9: fileName += "nine"; break;
                     case 10: fileName += "ten"; break;
@@ -76,14 +83,14 @@ public class MainActivity extends AppCompatActivity {
                     case 13: fileName += "king"; break;
                 }
                 fileName += "_of_";
-                switch (hand[i].getRank()) {
+                switch (card.getRank()) {
                     case "hearts": fileName += "hearts"; break;
                     case "diamonds": fileName += "diamonds"; break;
                     case "clubs": fileName += "clubs"; break;
                     case "spades": fileName += "spades"; break;
                 }
 
-                // sets the ImageVews on each card to the corresponding filename
+                // sets the ImageViews on each card to the corresponding filename
                 int imageResource = getResources().getIdentifier(fileName, "drawable", getPackageName());
                 imageViews[i].setImageResource(imageResource);
                 imageViews[i].setVisibility(View.VISIBLE);
