@@ -54,6 +54,7 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
                         case 4:
                         case 5:
                         case 6:
+                            // get the card value at the index
                             value = hand.get(i).getValue();
                             // PRINTS VALUE CLICKED TO TEST, SOP can be removed later
                             System.out.println(value); break;
