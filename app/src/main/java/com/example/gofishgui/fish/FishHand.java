@@ -115,6 +115,42 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
                                 System.out.print(card.getValue() + " ");
                             }
 
+                            for(int g = 1; i < 14; ++g) {
+                                int value = 0;
+                                for (int z = 0; i < currHand.size(); ++i) {
+                                    if(currHand.get(z).getValue() == g) {
+                                        value++;
+                                    }
+                                }
+                                if(value == 4) {
+                                    for (int h = currHand.size(); 0 < h; --h) {
+                                        if(currHand.get(h).getValue() == g) {
+                                            currHand.remove(h);
+                                        }
+                                    }
+                                    this.fishGameState.setPlayerScore(this.fishGameState.getPlayerScore()+1);
+                                    System.out.print("humand Hand gained a point");
+                                }
+                            }
+
+                            for(int g = 1; i < 14; ++g) {
+                                int value = 0;
+                                for (int z = 0; i < otherHand.size(); ++i) {
+                                    if(otherHand.get(z).getValue() == g) {
+                                        value++;
+                                    }
+                                }
+                                if(value == 4) {
+                                    for (int h = otherHand.size(); 0 < h; --h) {
+                                        if(otherHand.get(h).getValue() == g) {
+                                            otherHand.remove(h);
+                                        }
+                                    }
+                                    this.fishGameState.setOpponentScore(this.fishGameState.getOpponentScore()+1);
+                                    System.out.print("computer player gets a point");
+                                }
+                            }
+
                             System.out.println(" ");
                             break;
                     }

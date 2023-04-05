@@ -29,29 +29,33 @@ public class FishDumbAI {
     }
 
     public boolean dumbAsk() {
+
         value = randomVal();
-        fishActionObject.askForCard(value, 1);
+        //if(fishActionObject.askForCard(value, 1)) {
+            //this.dumbAsk();
+            fishActionObject.askForCard(value, 1);
 
+            System.out.print("Computer hand after ask: ");
+            for (FishCard card : computerHand) {
+                System.out.print(card.getValue() + " ");
+            }
+            System.out.println(" ");
+            System.out.print("User hand after ask: ");
+            for (FishCard card : humanHand) {
+                System.out.print(card.getValue() + " ");
+            }
+            System.out.println(" ");
+            System.out.print("Deck after ask: ");
+            for (FishCard card : deck) {
+                System.out.print(card.getValue() + " ");
+            }
+            System.out.println(" ");
 
-        System.out.print("Computer hand after ask: ");
-        for (FishCard card : computerHand) {
-            System.out.print(card.getValue() + " ");
-        }
-        System.out.println(" ");
-        System.out.print("User hand after ask: ");
-        for (FishCard card : humanHand) {
-            System.out.print(card.getValue() + " ");
-        }
-        System.out.println(" ");
-        System.out.print("Deck after ask: ");
-        for (FishCard card : deck) {
-            System.out.print(card.getValue() + " ");
-        }
-        System.out.println(" ");
-
-        fishGameState.setHumanHand(humanHand); //updates the humanHand in fishGameState
-        fishGameState.setComputerHand(computerHand);; //updates the computerHand in fishGameState
-        fishGameState.setDeck(deck); //updates the deck in fishGameState
+            fishGameState.setHumanHand(humanHand); //updates the humanHand in fishGameState
+            fishGameState.setComputerHand(computerHand);
+            ; //updates the computerHand in fishGameState
+            fishGameState.setDeck(deck); //updates the deck in fishGameState
+        //}
 
         return true;
     }

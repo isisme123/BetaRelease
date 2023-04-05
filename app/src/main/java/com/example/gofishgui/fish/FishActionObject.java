@@ -8,6 +8,8 @@ public class FishActionObject {
     private ArrayList<FishCard> otherHand;
     private ArrayList<FishCard> deck;
 
+    //private FishDumbAI computer;
+
 
 
     // constructor
@@ -15,6 +17,7 @@ public class FishActionObject {
         this.currHand = currHand;
         this.otherHand = otherHand;
         this.deck = deck;
+        //computer = new FishDumbAI(currHand, otherHand, deck);
     }
 
     // askforcard method
@@ -33,8 +36,13 @@ public class FishActionObject {
             return true;
         }
         else {
+
             System.out.println("Go Fish!");
             drawCard(playerIdx);
+
+            //if(playerIdx == 0) {
+            //    computer.dumbAsk();
+            //}
             return false;
         }
     }
