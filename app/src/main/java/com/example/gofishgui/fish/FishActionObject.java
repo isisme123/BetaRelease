@@ -49,5 +49,8 @@ public class FishActionObject {
         hand.removeAll(cardsToRemove);
     }
 
+    public String getCards() {
+        return null;
+    }
 }
 
