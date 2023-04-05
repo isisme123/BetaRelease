@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // !! FOR TESTING, will put the following into startGame method later!!
+        // (TEST), initializes a game, will put the following into startGame method later!!
         // image views for human cards array
         ImageView[] pc = new ImageView[7];
         // ask button array

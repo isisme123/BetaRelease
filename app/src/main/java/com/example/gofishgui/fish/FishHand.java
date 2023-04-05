@@ -20,7 +20,6 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
     FishActionObject fishActionObject; // instance of FishActionObject
 
     // FishHand constructor
-    // FishHand constructor
     public FishHand(Context c, ImageView[] pc, Button[] b, ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand) {
         super(c);
         this.c = c;

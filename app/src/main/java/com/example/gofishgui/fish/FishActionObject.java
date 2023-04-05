@@ -1,21 +1,19 @@
 package com.example.gofishgui.fish;
 
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.ImageView;
-
 import java.util.ArrayList;
 
 public class FishActionObject {
-//
-private ArrayList<FishCard> currHand;
+    // instance variables
+    private ArrayList<FishCard> currHand;
     private ArrayList<FishCard> otherHand;
 
+    // constructor
     public FishActionObject(ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand) {
         this.currHand = currHand;
         this.otherHand = otherHand;
     }
 
+    // askforcard method
     public void askForCard(int value) {
         ArrayList<FishCard> cardsToRemove = new ArrayList<>();
         for (FishCard card : otherHand) {
