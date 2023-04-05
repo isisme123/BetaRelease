@@ -15,24 +15,37 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
     private int value; // card value that was asked for
     private String rank; // card rank that was asked for
     private Button lastClickedButton;
-    ArrayList<FishCard> hand; // arraylist for the hand
+    ArrayList<FishCard> currHand; // arraylist for the hand
+    ArrayList<FishCard> otherHand; // arraylist for the hand
     FishActionObject fishActionObject; // instance of FishActionObject
 
     // FishHand constructor
-    // FishHand constructor
-    public FishHand(Context c, ImageView[] pc, Button[] b, ArrayList<FishCard> hand) {
+    public FishHand(Context c, ImageView[] pc, Button[] b, ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand) {
         super(c);
         this.c = c;
         this.pc = pc;
         this.b = b;
-        this.hand = hand;
-        this.fishActionObject = new FishActionObject(hand); // create instance of FishActionObject
+        this.currHand = currHand; // current player's hand
+        this.otherHand = otherHand; // other player's hand
+        this.fishActionObject = new FishActionObject(currHand, otherHand); // create instance of FishActionObject
         for (int i = 0; i < pc.length; i++) {
             pc[i].setOnClickListener(this);
             b[i].setOnClickListener(this);
             b[i].setVisibility(INVISIBLE);
         }
         setOnClickListener(this);
+
+        // (TEST) SOP hands before asking for card
+        System.out.print("Current hand before ask: ");
+        for (FishCard card : currHand) {
+            System.out.print(card.getValue() + " ");
+        }
+        System.out.println(" ");
+        System.out.print("Other hand before ask: ");
+        for (FishCard card : otherHand) {
+            System.out.print(card.getValue() + " ");
+        }
+        System.out.println(" ");
     }
 
 
@@ -59,16 +72,22 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
                         case 4:
                         case 5:
                         case 6:
-                            // get the card value and rank at the index
-                            FishCard card = hand.get(i);
-                            value = card.getValue();
-                            rank = card.getRank();
+                            // get the card value
+                            value = currHand.get(i).getValue();
                             // call askForCard() method on fishActionObject
-                            boolean hasCard = fishActionObject.askForCard(value, rank, hand);
-                            if (hasCard) {
-                                // call removeCard() method on fishActionObject if player has the card
-                                fishActionObject.removeCard(value, rank);
+                            fishActionObject.askForCard(value);
+
+                            // (TEST) SOP hands after asking for a card
+                            System.out.print("Current hand after ask: ");
+                            for (FishCard card : currHand) {
+                                System.out.print(card.getValue() + " ");
                             }
+                            System.out.println(" ");
+                            System.out.print("Other hand after ask: ");
+                            for (FishCard card : otherHand) {
+                                System.out.print(card.getValue() + " ");
+                            }
+                            System.out.println(" ");
                             break;
                     }
                 }
