@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class FishDeck {
+    private static FishDeck instance = null;
     private ArrayList<FishCard> deck;
     private ArrayList<FishCard> humanHand;
     private ArrayList<FishCard> computerHand;
@@ -25,6 +26,15 @@ public class FishDeck {
         }
     }
 
+    public static FishDeck getInstance() {
+        if (instance == null) {
+            instance = new FishDeck(new ArrayList<FishCard>());
+            instance.shuffle();
+            instance.dealCards();
+        }
+        return instance;
+    }
+
     public void shuffle() {
         Collections.shuffle(deck);
     }
@@ -41,4 +51,14 @@ public class FishDeck {
     public ArrayList<FishCard> getHumanHand() { return humanHand; }
 
     public ArrayList<FishCard> getComputerHand() { return computerHand; }
+
+    public FishCard drawCard(String playerType) {
+        FishCard card = deck.remove(0);
+        if (playerType.equals("human")) {
+            humanHand.add(card);
+        } else if (playerType.equals("computer")) {
+            computerHand.add(card);
+        }
+        return card;
+    }
 }

@@ -13,9 +13,12 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
     private ImageView[] pc; // image views for human cards
     private Button[] b; // button array
     private int value; // card value that was asked for
+    private String rank; // card rank that was asked for
     private Button lastClickedButton;
     ArrayList<FishCard> hand; // arraylist for the hand
+    FishActionObject fishActionObject; // instance of FishActionObject
 
+    // FishHand constructor
     // FishHand constructor
     public FishHand(Context c, ImageView[] pc, Button[] b, ArrayList<FishCard> hand) {
         super(c);
@@ -23,6 +26,7 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
         this.pc = pc;
         this.b = b;
         this.hand = hand;
+        this.fishActionObject = new FishActionObject(hand); // create instance of FishActionObject
         for (int i = 0; i < pc.length; i++) {
             pc[i].setOnClickListener(this);
             b[i].setOnClickListener(this);
@@ -30,6 +34,7 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
         }
         setOnClickListener(this);
     }
+
 
     // OnClickListener method
     @Override
@@ -54,12 +59,18 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
                         case 4:
                         case 5:
                         case 6:
-                            // get the card value at the index
-                            value = hand.get(i).getValue();
-                            // PRINTS VALUE CLICKED TO TEST, SOP can be removed later
-                            System.out.println(value); break;
+                            // get the card value and rank at the index
+                            FishCard card = hand.get(i);
+                            value = card.getValue();
+                            rank = card.getRank();
+                            // call askForCard() method on fishActionObject
+                            boolean hasCard = fishActionObject.askForCard(value, rank, hand);
+                            if (hasCard) {
+                                // call removeCard() method on fishActionObject if player has the card
+                                fishActionObject.removeCard(value, rank);
+                            }
+                            break;
                     }
-                    // !! ASKFORCARD CALL HERE!!
                 }
             }
             lastClickedButton.setVisibility(INVISIBLE);
@@ -75,6 +86,7 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
         }
     }
 }
+
 
 
 
