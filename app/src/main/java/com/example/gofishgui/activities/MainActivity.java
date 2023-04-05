@@ -11,6 +11,8 @@ import com.example.gofishgui.R;
 import com.example.gofishgui.fish.FishCard;
 import com.example.gofishgui.fish.FishDeck;
 import com.example.gofishgui.fish.FishHand;
+import com.example.gofishgui.fish.fishGameState;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,18 +46,24 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<FishCard> cards = new ArrayList<>();
         // creates deck from cards
         FishDeck deck = new FishDeck(cards);
+        fishGameState fishGameState = new fishGameState(); //instance of fish game state
         // shuffles cards
         deck.shuffle();
         // deals cards
         deck.dealCards();
         // gets human hand
         ArrayList<FishCard> humanHand = deck.getHumanHand();
+        fishGameState.setHumanHand(humanHand); //updates the humanHand in fishGameState
         // gets computer hand
         ArrayList<FishCard> computerHand = deck.getComputerHand();
+        fishGameState.setComputerHand(computerHand);; //updates the computerHand in fishGameState
+        //gets the deck or go fish pile
+        ArrayList<FishCard> myDeck = deck.getDeck();
+        fishGameState.setDeck(myDeck); //updates the deck in fishGameState
         // updates images for human hand (not required for computer hand cuz it is hidden the whole game
         updateHandImages(humanHand, pc);
         // creates FishHand for the human and also makes the buttons show
-        FishHand humanPlayerHand = new FishHand(this, pc, b, humanHand, computerHand);
+        FishHand humanPlayerHand = new FishHand(this, pc, b, humanHand, computerHand, myDeck);
         LinearLayout layout = findViewById(R.id.layout_main);
         layout.addView(humanPlayerHand);
     }

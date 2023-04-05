@@ -8,11 +8,14 @@ public class FishDeck {
     private ArrayList<FishCard> deck;
     private ArrayList<FishCard> humanHand;
     private ArrayList<FishCard> computerHand;
+    private fishGameState fishGameState;
+
 
     public FishDeck(ArrayList<FishCard> deck) {
         this.deck = deck;
         humanHand = new ArrayList<FishCard>();
         computerHand = new ArrayList<FishCard>();
+        this.fishGameState = new fishGameState();
         // Add cards to the deck
         for (int i = 1; i <= 13; i++) {
             FishCard heartCard = new FishCard("hearts", i);
@@ -52,13 +55,4 @@ public class FishDeck {
 
     public ArrayList<FishCard> getComputerHand() { return computerHand; }
 
-    public FishCard drawCard(String playerType) {
-        FishCard card = deck.remove(0);
-        if (playerType.equals("human")) {
-            humanHand.add(card);
-        } else if (playerType.equals("computer")) {
-            computerHand.add(card);
-        }
-        return card;
-    }
 }
