@@ -17,8 +17,11 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
     private Button lastClickedButton;
     ArrayList<FishCard> currHand; // arraylist for the hand
     ArrayList<FishCard> otherHand; // arraylist for the hand
-    ArrayList<FishCard> deck;
+    ArrayList<FishCard> deck; // arraylist for the deck
     FishActionObject fishActionObject; // instance of FishActionObject
+    fishGameState fishGameState; // instance of fishGameState
+
+
 
     // FishHand constructor
     public FishHand(Context c, ImageView[] pc, Button[] b, ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand, ArrayList<FishCard> deck) {
@@ -28,8 +31,9 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
         this.b = b;
         this.currHand = currHand; // current player's hand
         this.otherHand = otherHand; // other player's hand
-        this.deck = deck;
+        this.deck = deck; // the deck or go fish pile
         this.fishActionObject = new FishActionObject(currHand, otherHand, deck); // create instance of FishActionObject
+        this.fishGameState = new fishGameState(); // create instance of game state
         for (int i = 0; i < pc.length; i++) {
             pc[i].setOnClickListener(this);
             b[i].setOnClickListener(this);
@@ -54,7 +58,13 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
     // OnClickListener method
     @Override
     public void onClick(View v) {
-        if (v instanceof ImageView) { // if card is clicked
+
+        System.out.println("Player index onCLick: " + fishGameState.getCurrentPlayer());
+        // ask button only works when it is the user's turn
+        if (fishGameState.getCurrentPlayer() != 0) {
+            System.out.println("Cannot go, not your turn!");
+            return;
+        } else if (v instanceof ImageView) { // if card is clicked
             for (int i = 0; i < pc.length; i++) {
                 if (v == pc[i]) {
                     b[i].setVisibility(VISIBLE); // show a button
@@ -77,7 +87,9 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
                             // get the card value
                             value = currHand.get(i).getValue();
                             // call askForCard() method on fishActionObject
-                            fishActionObject.askForCard(value, 0);
+                            if (!(fishActionObject.askForCard(value, 0))) {
+                                fishGameState.nextPlayer();
+                            }
 
                             // (TEST) SOP hands after asking for a card
                             System.out.print("Current hand after ask: ");
@@ -94,6 +106,15 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
                             for (FishCard card : deck) {
                                 System.out.print(card.getValue() + " ");
                             }
+                            System.out.println(" ");
+                            fishGameState.setHumanHand(currHand); //updates the humanHand in fishGameState
+                            fishGameState.setComputerHand(otherHand);; //updates the computerHand in fishGameState
+                            fishGameState.setDeck(deck); //updates the deck in fishGameState
+                            System.out.print("humanHand updated in game state check: ");
+                            for (FishCard card : fishGameState.humanHand) {
+                                System.out.print(card.getValue() + " ");
+                            }
+
                             System.out.println(" ");
                             break;
                     }

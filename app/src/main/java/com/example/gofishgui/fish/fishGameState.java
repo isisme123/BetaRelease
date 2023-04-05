@@ -15,17 +15,26 @@ public class fishGameState {
     private boolean gameOver;
     //private FishDeck deck;
 
-    public fishGameState(int currentPlayer, List<FishCard> deck, List<FishCard> humanHand, List<FishCard> computerHand,
-                         int playerScore, int opponentScore, boolean gameOver) {
-
-        this.deck = deck;
-        this.humanHand = humanHand;
-        this.computerHand = computerHand;
-        this.currentPlayer = currentPlayer;
-        this.playerScore = playerScore;
-        this.opponentScore = opponentScore;
-        this.gameOver = gameOver;
-
+//    public fishGameState(int currentPlayer, List<FishCard> deck, List<FishCard> humanHand, List<FishCard> computerHand,
+//                         int playerScore, int opponentScore, boolean gameOver) {
+//
+//        this.deck = deck;
+//        this.humanHand = humanHand;
+//        this.computerHand = computerHand;
+//        this.currentPlayer = currentPlayer;
+//        this.playerScore = playerScore;
+//        this.opponentScore = opponentScore;
+//        this.gameOver = gameOver;
+//
+//    }
+    public fishGameState() {
+        currentPlayer = 0;
+        deck = null;
+        humanHand = null; //Map of the player ID to their hand of cards
+        computerHand = null;
+        playerScore = 0;
+        opponentScore = 0;
+        gameOver = false;
     }
 
     public fishGameState(fishGameState p) {
@@ -43,11 +52,11 @@ public class fishGameState {
     }
 
     public void nextPlayer() {
-        if(currentPlayer == 0) {
-            currentPlayer = 1;
+        if(getCurrentPlayer() == 0) {
+            setCurrentPlayer(1);
         }
         else {
-            currentPlayer = 0;
+            setCurrentPlayer(0);
         }
     }
 
@@ -77,6 +86,9 @@ public class fishGameState {
 
     public int getOpponentScore() {
         return opponentScore;
+    }
+    public void setCurrentPlayer(int currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 
     public void setDeck(List<FishCard> deck) {

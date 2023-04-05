@@ -40,6 +40,11 @@ public class FishDumbAI {
             System.out.print(card.getValue() + " ");
         }
         System.out.println(" ");
+        System.out.print("Deck after ask: ");
+        for (FishCard card : deck) {
+            System.out.print(card.getValue() + " ");
+        }
+        System.out.println(" ");
 
         return true;
     }

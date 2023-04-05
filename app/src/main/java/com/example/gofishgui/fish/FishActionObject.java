@@ -9,6 +9,7 @@ public class FishActionObject {
     private ArrayList<FishCard> deck;
 
 
+
     // constructor
     public FishActionObject(ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand, ArrayList<FishCard> deck) {
         this.currHand = currHand;
@@ -17,7 +18,7 @@ public class FishActionObject {
     }
 
     // askforcard method
-    public void askForCard(int value, int playerIdx) {
+    public boolean askForCard(int value, int playerIdx) {
         ArrayList<FishCard> cardsToRemove = new ArrayList<>();
         boolean hasCard = false;
         for (FishCard card : otherHand) {
@@ -29,13 +30,15 @@ public class FishActionObject {
         }
         if (hasCard == true) {
             otherHand.removeAll(cardsToRemove);
+            return true;
         }
         else {
             System.out.println("Go Fish!");
             drawCard(playerIdx);
-
+            return false;
         }
     }
+
     public FishCard drawCard(int playerIdx) {
 
         FishCard card;
