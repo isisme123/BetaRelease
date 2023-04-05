@@ -6,16 +6,16 @@ public class fishGameState {
     // Instance variables
     private int currentPlayer;
 
-    public List<FishCard> deck;
-    public List<FishCard> humanHand; //Map of the player ID to their hand of cards
-    public List<FishCard> computerHand;
+    public ArrayList<FishCard> deck;
+    public ArrayList<FishCard> humanHand; //Map of the player ID to their hand of cards
+    public ArrayList<FishCard> computerHand;
     //private Map<Integer, Integer> playerScores; // ..scores?!
     private int playerScore;
     private int opponentScore;
     private boolean gameOver;
     //private FishDeck deck;
 
-    public fishGameState(int currentPlayer, List<FishCard> deck, List<FishCard> humanHand, List<FishCard> computerHand,
+    public fishGameState(int currentPlayer, ArrayList<FishCard> deck, ArrayList<FishCard> humanHand, ArrayList<FishCard> computerHand,
                          int playerScore, int opponentScore, boolean gameOver) {
 
         this.deck = deck;
@@ -79,15 +79,15 @@ public class fishGameState {
         return opponentScore;
     }
 
-    public void setDeck(List<FishCard> deck) {
+    public void setDeck(ArrayList<FishCard> deck) {
         this.deck = deck;
     }
 
-    public void setHumanHand(List<FishCard> humanHand) {
+    public void setHumanHand(ArrayList<FishCard> humanHand) {
         this.humanHand = humanHand;
     }
 
-    public void setComputerHand(List<FishCard> computerHand) {
+    public void setComputerHand(ArrayList<FishCard> computerHand) {
         this.computerHand = computerHand;
     }
 
