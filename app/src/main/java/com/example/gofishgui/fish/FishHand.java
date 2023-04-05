@@ -17,17 +17,19 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
     private Button lastClickedButton;
     ArrayList<FishCard> currHand; // arraylist for the hand
     ArrayList<FishCard> otherHand; // arraylist for the hand
+    ArrayList<FishCard> deck;
     FishActionObject fishActionObject; // instance of FishActionObject
 
     // FishHand constructor
-    public FishHand(Context c, ImageView[] pc, Button[] b, ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand) {
+    public FishHand(Context c, ImageView[] pc, Button[] b, ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand, ArrayList<FishCard> deck) {
         super(c);
         this.c = c;
         this.pc = pc;
         this.b = b;
         this.currHand = currHand; // current player's hand
         this.otherHand = otherHand; // other player's hand
-        this.fishActionObject = new FishActionObject(currHand, otherHand); // create instance of FishActionObject
+        this.deck = deck;
+        this.fishActionObject = new FishActionObject(currHand, otherHand, deck); // create instance of FishActionObject
         for (int i = 0; i < pc.length; i++) {
             pc[i].setOnClickListener(this);
             b[i].setOnClickListener(this);
@@ -75,7 +77,7 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
                             // get the card value
                             value = currHand.get(i).getValue();
                             // call askForCard() method on fishActionObject
-                            fishActionObject.askForCard(value);
+                            fishActionObject.askForCard(value, 0);
 
                             // (TEST) SOP hands after asking for a card
                             System.out.print("Current hand after ask: ");
@@ -85,6 +87,11 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
                             System.out.println(" ");
                             System.out.print("Other hand after ask: ");
                             for (FishCard card : otherHand) {
+                                System.out.print(card.getValue() + " ");
+                            }
+                            System.out.println(" ");
+                            System.out.print("Deck after ask: ");
+                            for (FishCard card : deck) {
                                 System.out.print(card.getValue() + " ");
                             }
                             System.out.println(" ");

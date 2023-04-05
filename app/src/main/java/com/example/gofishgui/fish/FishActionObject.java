@@ -6,23 +6,52 @@ public class FishActionObject {
     // instance variables
     private ArrayList<FishCard> currHand;
     private ArrayList<FishCard> otherHand;
+    private ArrayList<FishCard> deck;
+
 
     // constructor
-    public FishActionObject(ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand) {
+    public FishActionObject(ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand, ArrayList<FishCard> deck) {
         this.currHand = currHand;
         this.otherHand = otherHand;
+        this.deck = deck;
     }
 
     // askforcard method
-    public void askForCard(int value) {
+    public void askForCard(int value, int playerIdx) {
         ArrayList<FishCard> cardsToRemove = new ArrayList<>();
+        boolean hasCard = false;
         for (FishCard card : otherHand) {
             if (card.getValue() == value) {
                 currHand.add(card);
                 cardsToRemove.add(card);
+                hasCard = true;
             }
         }
-        otherHand.removeAll(cardsToRemove);
+        if (hasCard == true) {
+            otherHand.removeAll(cardsToRemove);
+        }
+        else {
+            System.out.println("Go Fish!");
+            drawCard(playerIdx);
+
+        }
     }
+    public FishCard drawCard(int playerIdx) {
+
+        FishCard card;
+        if (deck != null) {
+            card = deck.remove(0);
+        } else {
+            return null;
+        }
+
+        if (playerIdx == 0) {
+            currHand.add(card);
+        } else {
+            otherHand.add(card);
+        }
+        return card;
+    }
+
 }
 

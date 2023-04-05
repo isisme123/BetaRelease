@@ -52,13 +52,4 @@ public class FishDeck {
 
     public ArrayList<FishCard> getComputerHand() { return computerHand; }
 
-    public FishCard drawCard(String playerType) {
-        FishCard card = deck.remove(0);
-        if (playerType.equals("human")) {
-            humanHand.add(card);
-        } else if (playerType.equals("computer")) {
-            computerHand.add(card);
-        }
-        return card;
-    }
 }

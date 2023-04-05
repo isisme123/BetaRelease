@@ -52,10 +52,12 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<FishCard> humanHand = deck.getHumanHand();
         // gets computer hand
         ArrayList<FishCard> computerHand = deck.getComputerHand();
+        ArrayList<FishCard> myDeck = deck.getDeck();
+
         // updates images for human hand (not required for computer hand cuz it is hidden the whole game
         updateHandImages(humanHand, pc);
         // creates FishHand for the human and also makes the buttons show
-        FishHand humanPlayerHand = new FishHand(this, pc, b, humanHand, computerHand);
+        FishHand humanPlayerHand = new FishHand(this, pc, b, humanHand, computerHand, myDeck);
         LinearLayout layout = findViewById(R.id.layout_main);
         layout.addView(humanPlayerHand);
     }
