@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.gofishgui.R;
 import com.example.gofishgui.activities.MainActivity;
 
 import java.util.ArrayList;
@@ -23,11 +24,12 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
     ArrayList<FishCard> deck; // arraylist for the deck
     FishActionObject fishActionObject; // instance of FishActionObject
     private fishGameState fish = fishGameState.getInstance();; // instance of fishGameState
+    private int position;
+    Button ask = findViewById(R.id.askButton);
 
 
     // FishHand constructor
-    public FishHand(Context c, ArrayList<ImageView> pc, ArrayList<Button> b, ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand, ArrayList<FishCard> deck,
-                    MainActivity mainActivity) {
+    public FishHand(Context c, ArrayList<ImageView> pc, ArrayList<Button> b, ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand, ArrayList<FishCard> deck) {
         super(c);
         this.c = c;
         this.pc = pc;
@@ -35,8 +37,7 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
         this.currHand = currHand; // current player's hand
         this.otherHand = otherHand; // other player's hand
         this.deck = deck; // the deck or go fish pile
-        this.fishActionObject = new FishActionObject(currHand, otherHand, deck, mainActivity); // create instance of FishActionObject
-        this.mainActivity = mainActivity;
+        this.fishActionObject = new FishActionObject(currHand, otherHand, deck); // create instance of FishActionObject
         //this.fish = new fishGameState(); // create instance of game state
         for (int i = 0; i < pc.size(); i++) {
             ImageView cardPicture = pc.get(i);
@@ -60,42 +61,17 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
         System.out.println(" ");
     }
 
-
     // OnClickListener method
     @Override
     public void onClick(View v) {
-
         System.out.println("Player index onCLick: " + fish.getCurrentPlayer());
         // ask button only works when it is the user's turn
         if (fish.getCurrentPlayer() != 0) {
             System.out.println("Cannot go, not your turn!");
             return;
-        } else if (v instanceof ImageView) { // if card is clicked
-            for (int i = 0; i < pc.size(); i++) {
-                ImageView cardPicture = pc.get(i);
-                Button button = b.get(i);
-                if (v == cardPicture) {
-                    button.setVisibility(VISIBLE); // show a button
-                    lastClickedButton = button;
-                } else {
-                    button.setVisibility(INVISIBLE);
-                }
-            }
-        } else if (v instanceof Button) { // if the button is clicked
-            for (int i = 0; i < b.size(); i++) {
-                ImageView cardPicture = pc.get(i);
-                Button button = b.get(i);
-                if (v == button) { // go through button array and find card value that was asked for
-                    switch(i) {
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                        case 6:
-                            // get the card value
-                            value = currHand.get(i).getValue();
+        }
+             //get the card value
+                            value = position;
                             // call askForCard() method on fishActionObject
                             fishActionObject.askForCard(value, 0);
 
@@ -118,26 +94,80 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
                             fish.setHumanHand(currHand); //updates the humanHand in fishGameState
                             fish.setComputerHand(otherHand);; //updates the computerHand in fishGameState
                             fish.setDeck(deck); //updates the deck in fishGameState
-
-//                             mainActivity.updateHandImages(currHand, currHand, otherHand, pc);
-
-                            break;
-                    }
-                }
-            }
-            lastClickedButton.setVisibility(INVISIBLE);
-            lastClickedButton = null;
-        } else { // if card is not clicked
-            for (int i = 0; i < b.size(); i++) {
-                ImageView cardPicture = pc.get(i);
-                Button button = b.get(i);
-                button.setVisibility(INVISIBLE);
-            }
-            if (lastClickedButton != null) {
-                lastClickedButton.setVisibility(INVISIBLE);
-                lastClickedButton = null;
-            }
         }
+
+//        } else if (v instanceof ImageView) { // if card is clicked
+//            for (int i = 0; i < pc.size(); i++) {
+//                ImageView cardPicture = pc.get(i);
+//                Button button = b.get(i);
+//                if (v == cardPicture) {
+//                    button.setVisibility(VISIBLE); // show a button
+//                    lastClickedButton = button;
+//                } else {
+//                    button.setVisibility(INVISIBLE);
+//                }
+//            }
+//        } else if (v instanceof Button) { // if the button is clicked
+//            for (int i = 0; i < b.size(); i++) {
+//                ImageView cardPicture = pc.get(i);
+//                Button button = b.get(i);
+//                if (v == button) { // go through button array and find card value that was asked for
+//                    switch(i) {
+//                        case 0:
+//                        case 1:
+//                        case 2:
+//                        case 3:
+//                        case 4:
+//                        case 5:
+//                        case 6:
+//                            // get the card value
+//                            value = currHand.get(i).getValue();
+//                            // call askForCard() method on fishActionObject
+//                            fishActionObject.askForCard(value, 0);
+//
+//                            // (TEST) SOP hands after asking for a card
+//                            System.out.print("Current hand after ask: ");
+//                            for (FishCard card : currHand) {
+//                                System.out.print(card.getValue() + " ");
+//                            }
+//                            System.out.println(" ");
+//                            System.out.print("Other hand after ask: ");
+//                            for (FishCard card : otherHand) {
+//                                System.out.print(card.getValue() + " ");
+//                            }
+//                            System.out.println(" ");
+//                            System.out.print("Deck after ask: ");
+//                            for (FishCard card : deck) {
+//                                System.out.print(card.getValue() + " ");
+//                            }
+//                            System.out.println(" ");
+//                            fish.setHumanHand(currHand); //updates the humanHand in fishGameState
+//                            fish.setComputerHand(otherHand);; //updates the computerHand in fishGameState
+//                            fish.setDeck(deck); //updates the deck in fishGameState
+//
+////                             mainActivity.updateHandImages(currHand, currHand, otherHand, pc);
+//
+//                            break;
+//                    }
+//                }
+//            }
+//            lastClickedButton.setVisibility(INVISIBLE);
+//            lastClickedButton = null;
+//        } else { // if card is not clicked
+//            for (int i = 0; i < b.size(); i++) {
+//                ImageView cardPicture = pc.get(i);
+//                Button button = b.get(i);
+//                button.setVisibility(INVISIBLE);
+//            }
+//            if (lastClickedButton != null) {
+//                lastClickedButton.setVisibility(INVISIBLE);
+//                lastClickedButton = null;
+//            }
+//        }
+
+    public int setPosition(int pos) {
+        position = pos;
+        return position;
     }
 }
 

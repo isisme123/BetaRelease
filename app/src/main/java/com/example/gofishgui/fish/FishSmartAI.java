@@ -18,7 +18,7 @@ public class FishSmartAI {
         this.humanHand = humanHand;
         this.computerHand = computerHand;
         this.deck = deck;
-        this.fishActionObject = new FishActionObject(humanHand, computerHand, deck, mainActivity);
+        this.fishActionObject = new FishActionObject(humanHand, computerHand, deck);
         this.mainActivity = mainActivity;
 
     }

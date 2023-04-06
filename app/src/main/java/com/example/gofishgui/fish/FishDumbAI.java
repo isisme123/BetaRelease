@@ -13,14 +13,12 @@ public class FishDumbAI {
     int value;
     FishActionObject fishActionObject;
     private fishGameState fish = fishGameState.getInstance();
-    private MainActivity mainActivity;
 
-    public FishDumbAI(ArrayList<FishCard> humanHand, ArrayList<FishCard> computerHand, ArrayList<FishCard> deck,
-                      MainActivity mainActivity) {
+    public FishDumbAI(ArrayList<FishCard> humanHand, ArrayList<FishCard> computerHand, ArrayList<FishCard> deck) {
         this.humanHand = fish.humanHand;
         this.computerHand = fish.computerHand;
         this.deck = fish.deck;
-        this.fishActionObject = new FishActionObject(fish.computerHand, fish.humanHand, fish.deck, mainActivity);
+        this.fishActionObject = new FishActionObject(fish.computerHand, fish.humanHand, fish.deck);
         //this.fish = new fishGameState();
 
     }

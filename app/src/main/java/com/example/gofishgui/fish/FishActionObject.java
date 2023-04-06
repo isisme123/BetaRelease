@@ -13,17 +13,14 @@ public class FishActionObject {
     private ArrayList<FishCard> otherHand;
     private ArrayList<FishCard> deck;
     private fishGameState fish = fishGameState.getInstance();
-    private MainActivity mainActivity;
 
 
 
     // constructor
-    public FishActionObject(ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand, ArrayList<FishCard> deck,
-                            MainActivity mainActivity) {
+    public FishActionObject(ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand, ArrayList<FishCard> deck) {
         this.currHand = currHand;
         this.otherHand = otherHand;
         this.deck = deck;
-        this.mainActivity = mainActivity;
     }
 
     // askforcard method
