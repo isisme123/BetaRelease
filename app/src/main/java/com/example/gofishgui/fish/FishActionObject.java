@@ -7,6 +7,7 @@ public class FishActionObject {
     private ArrayList<FishCard> currHand;
     private ArrayList<FishCard> otherHand;
     private ArrayList<FishCard> deck;
+    private fishGameState fish = fishGameState.getInstance();
 
 
 
@@ -35,6 +36,7 @@ public class FishActionObject {
         else {
             System.out.println("Go Fish!");
             drawCard(playerIdx);
+            fish.nextPlayer();
             return false;
         }
     }
@@ -49,9 +51,9 @@ public class FishActionObject {
         }
 
         if (playerIdx == 0) {
-            currHand.add(card);
+            fish.humanHand.add(card);
         } else {
-            otherHand.add(card);
+            fish.computerHand.add(card);
         }
         return card;
     }

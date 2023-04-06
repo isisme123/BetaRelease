@@ -10,14 +10,14 @@ public class FishDumbAI {
     private ArrayList<FishCard> deck;
     int value;
     FishActionObject fishActionObject;
-    fishGameState fishGameState;
+    private fishGameState fish = fishGameState.getInstance();
 
     public FishDumbAI(ArrayList<FishCard> humanHand, ArrayList<FishCard> computerHand, ArrayList<FishCard> deck) {
-        this.humanHand = humanHand;
-        this.computerHand = computerHand;
-        this.deck = deck;
-        this.fishActionObject = new FishActionObject(humanHand, computerHand, deck);
-        this.fishGameState = new fishGameState();
+        this.humanHand = fish.humanHand;
+        this.computerHand = fish.computerHand;
+        this.deck = fish.deck;
+        this.fishActionObject = new FishActionObject(fish.computerHand, fish.humanHand, fish.deck);
+        //this.fish = new fishGameState();
 
     }
 
@@ -29,17 +29,17 @@ public class FishDumbAI {
     }
 
     public boolean dumbAsk() {
+
         value = randomVal();
         fishActionObject.askForCard(value, 1);
 
-
-        System.out.print("Computer hand after ask: ");
-        for (FishCard card : computerHand) {
+        System.out.print("User hand after ask: ");
+        for (FishCard card : humanHand) {
             System.out.print(card.getValue() + " ");
         }
         System.out.println(" ");
-        System.out.print("User hand after ask: ");
-        for (FishCard card : humanHand) {
+        System.out.print("Computer hand after ask: ");
+        for (FishCard card : computerHand) {
             System.out.print(card.getValue() + " ");
         }
         System.out.println(" ");
@@ -49,9 +49,9 @@ public class FishDumbAI {
         }
         System.out.println(" ");
 
-        fishGameState.setHumanHand(humanHand); //updates the humanHand in fishGameState
-        fishGameState.setComputerHand(computerHand);; //updates the computerHand in fishGameState
-        fishGameState.setDeck(deck); //updates the deck in fishGameState
+        fish.setHumanHand(humanHand); //updates the humanHand in fishGameState
+        fish.setComputerHand(computerHand);; //updates the computerHand in fishGameState
+        fish.setDeck(deck); //updates the deck in fishGameState
 
         return true;
     }
