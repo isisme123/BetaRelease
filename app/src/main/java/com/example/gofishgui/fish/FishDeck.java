@@ -43,10 +43,14 @@ public class FishDeck {
     }
 
     public void dealCards() {
-        for (int i = 0; i < 7; i++) {
-            humanHand.add(deck.remove(0));
-            computerHand.add(deck.remove(0));
-        }
+        humanHand.add(new FishCard("hearts", 3));
+        humanHand.add(new FishCard("hearts", 3));
+        humanHand.add(new FishCard("hearts", 3));
+        computerHand.add(new FishCard("hearts", 3));
+        //for (int i = 0; i < 7; i++) {
+        //    humanHand.add(deck.remove(0));
+        //    computerHand.add(deck.remove(0));
+        //}
     }
 
     public ArrayList<FishCard> getDeck() { return deck; }
@@ -54,5 +58,6 @@ public class FishDeck {
     public ArrayList<FishCard> getHumanHand() { return humanHand; }
 
     public ArrayList<FishCard> getComputerHand() { return computerHand; }
+
 
 }
