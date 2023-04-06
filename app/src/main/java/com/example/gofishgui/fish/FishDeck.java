@@ -8,14 +8,14 @@ public class FishDeck {
     private ArrayList<FishCard> deck;
     private ArrayList<FishCard> humanHand;
     private ArrayList<FishCard> computerHand;
-    private fishGameState fishGameState;
+    private fishGameState fish = fishGameState.getInstance();
 
 
     public FishDeck(ArrayList<FishCard> deck) {
         this.deck = deck;
         humanHand = new ArrayList<FishCard>();
         computerHand = new ArrayList<FishCard>();
-        this.fishGameState = new fishGameState();
+        //this.fish = new fishGameState();
         // Add cards to the deck
         for (int i = 1; i <= 13; i++) {
             FishCard heartCard = new FishCard("hearts", i);

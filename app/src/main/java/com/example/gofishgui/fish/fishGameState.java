@@ -4,11 +4,13 @@ import java.util.List;
 
 public class fishGameState {
     // Instance variables
+    private static fishGameState instance = null;
+
     private int currentPlayer;
 
-    public List<FishCard> deck;
-    public List<FishCard> humanHand; //Map of the player ID to their hand of cards
-    public List<FishCard> computerHand;
+    public ArrayList<FishCard> deck;
+    public ArrayList<FishCard> humanHand; //Map of the player ID to their hand of cards
+    public ArrayList<FishCard> computerHand;
     //private Map<Integer, Integer> playerScores; // ..scores?!
     private int playerScore;
     private int opponentScore;
@@ -27,7 +29,7 @@ public class fishGameState {
 //        this.gameOver = gameOver;
 //
 //    }
-    public fishGameState() {
+fishGameState() {
         currentPlayer = 0;
         deck = null;
         humanHand = null; //Map of the player ID to their hand of cards
@@ -45,6 +47,13 @@ public class fishGameState {
         this.playerScore = p.playerScore;
         this.opponentScore = p.opponentScore;
         this.gameOver = p.gameOver;
+    }
+
+    public static fishGameState getInstance() {
+        if (instance == null) {
+            instance = new fishGameState();
+        }
+        return instance;
     }
 
     public void startGame() {
@@ -91,15 +100,15 @@ public class fishGameState {
         this.currentPlayer = currentPlayer;
     }
 
-    public void setDeck(List<FishCard> deck) {
+    public void setDeck(ArrayList<FishCard> deck) {
         this.deck = deck;
     }
 
-    public void setHumanHand(List<FishCard> humanHand) {
+    public void setHumanHand(ArrayList<FishCard> humanHand) {
         this.humanHand = humanHand;
     }
 
-    public void setComputerHand(List<FishCard> computerHand) {
+    public void setComputerHand(ArrayList<FishCard> computerHand) {
         this.computerHand = computerHand;
     }
 

@@ -7,8 +7,7 @@ public class FishActionObject {
     private ArrayList<FishCard> currHand;
     private ArrayList<FishCard> otherHand;
     private ArrayList<FishCard> deck;
-
-    //private FishDumbAI computer;
+    private fishGameState fish = fishGameState.getInstance();
 
 
 
@@ -17,7 +16,6 @@ public class FishActionObject {
         this.currHand = currHand;
         this.otherHand = otherHand;
         this.deck = deck;
-        //computer = new FishDumbAI(currHand, otherHand, deck);
     }
 
     // askforcard method
@@ -36,13 +34,9 @@ public class FishActionObject {
             return true;
         }
         else {
-
             System.out.println("Go Fish!");
             drawCard(playerIdx);
-
-            //if(playerIdx == 0) {
-            //    computer.dumbAsk();
-            //}
+            fish.nextPlayer();
             return false;
         }
     }
@@ -57,14 +51,12 @@ public class FishActionObject {
         }
 
         if (playerIdx == 0) {
-            currHand.add(card);
+            fish.humanHand.add(card);
         } else {
-            otherHand.add(card);
+            fish.computerHand.add(card);
         }
         return card;
     }
-
-
 
 }
 
