@@ -4,9 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
+
 import com.example.gofishgui.R;
 import com.example.gofishgui.fish.FishCard;
 import com.example.gofishgui.fish.FishDeck;
@@ -34,22 +39,23 @@ public class MainActivity extends AppCompatActivity {
         // image views for human cards array
         ImageView[] pc = new ImageView[7];
         // ask button array
-        Button[] b = new Button[pc.length];
+        //Button[] b = new Button[pc.length];
+        Button z = findViewById(R.id.askButton);
         // populates button and imageview
-        pc[0] = findViewById(R.id.player_card1);
-        pc[1] = findViewById(R.id.player_card2);
-        pc[2] = findViewById(R.id.player_card3);
-        pc[3] = findViewById(R.id.player_card4);
-        pc[4] = findViewById(R.id.player_card5);
-        pc[5] = findViewById(R.id.player_card6);
-        pc[6] = findViewById(R.id.player_card7);
-        b[0] = findViewById(R.id.askbutton1);
-        b[1] = findViewById(R.id.askbutton2);
-        b[2] = findViewById(R.id.askbutton3);
-        b[3] = findViewById(R.id.askbutton4);
-        b[4] = findViewById(R.id.askbutton5);
-        b[5] = findViewById(R.id.askbutton6);
-        b[6] = findViewById(R.id.askbutton7);
+        //pc[0] = findViewById(R.id.player_card1);
+//        pc[1] = findViewById(R.id.player_card2);
+//        pc[2] = findViewById(R.id.player_card3);
+//        pc[3] = findViewById(R.id.player_card4);
+//        pc[4] = findViewById(R.id.player_card5);
+//        pc[5] = findViewById(R.id.player_card6);
+//        pc[6] = findViewById(R.id.player_card7);
+//        b[0] = findViewById(R.id.askbutton1);
+//        b[1] = findViewById(R.id.askbutton2);
+//        b[2] = findViewById(R.id.askbutton3);
+//        b[3] = findViewById(R.id.askbutton4);
+//        b[4] = findViewById(R.id.askbutton5);
+//        b[5] = findViewById(R.id.askbutton6);
+//        b[6] = findViewById(R.id.askbutton7);
         // generates 52 cards
         ArrayList<FishCard> cards = new ArrayList<>();
         // creates deck from cards
@@ -68,11 +74,76 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<FishCard> myDeck = deck.getDeck();
         fish.setDeck(myDeck); //updates the deck in fishGameState
         // updates images for human hand (not required for computer hand cuz it is hidden the whole game
-        updateHandImages(humanHand, pc);
+        //updateHandImages(humanHand, pc);
         // creates FishHand for the human and also makes the buttons show
-        FishHand humanPlayerHand = new FishHand(this, pc, b, humanHand, computerHand, myDeck);
+        //FishHand humanPlayerHand = new FishHand(this, pc, b, humanHand, computerHand, myDeck);
         LinearLayout layout = findViewById(R.id.layout_main);
-        layout.addView(humanPlayerHand);
+        //layout.addView(humanPlayerHand);
+        TextView cardZ = (TextView) findViewById(R.id.textView);
+        String cardSet = "";
+        for(int i = 0; i < fish.humanHand.size(); ++i) {
+            cardSet = cardSet + fish.humanHand.get(i).getValue() + ", ";
+            System.out.println("Added Card to Textview)");
+        }
+        cardZ.setText(cardSet);
+
+        Spinner dropdown = findViewById(R.id.spinner2);
+        String[] spannerNumbers = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"};
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, spannerNumbers);
+        dropdown.setAdapter(adapter);
+
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
+                switch(position) {
+                    case 0:
+                        // Assign Dummy AI here, SOP for testing purposes
+                        System.out.println("1");
+                        break;
+                    case 1:
+                        // Assign Smart AI here, SOP for testing purposes
+                        System.out.println("2");
+                        break;
+                    case 2:
+                        System.out.println("3");
+                        break;
+                    case 3:
+                        System.out.println("4");
+                        break;
+                    case 4:
+                        System.out.println("5");
+                        break;
+                    case 5:
+                        System.out.println("6");
+                        break;
+                    case 6:
+                        System.out.println("7");
+                        break;
+                    case 7:
+                        System.out.println("8");
+                        break;
+                    case 8:
+                        System.out.println("9");
+                        break;
+                    case 9:
+                        System.out.println("10");
+                        break;
+                    case 10:
+                        System.out.println("11");
+                        break;
+                    case 11:
+                        System.out.println("12");
+                        break;
+                    case 12:
+                        System.out.println("13");
+                        break;
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
     }
 
     @Override
@@ -131,46 +202,48 @@ public class MainActivity extends AppCompatActivity {
 
 
     // Helper method that updates the images on the cards
-    public void updateHandImages(ArrayList<FishCard> hand, ImageView[] imageViews) {
-        int numCards = hand.size();
-        for (int i = 0; i < imageViews.length; i++) {
-            if (i < numCards) {
-                FishCard card = hand.get(i);
-                String fileName = "";
-                switch (card.getValue()) {
-                    case 1: fileName += "ace"; break;
-                    case 2: fileName += "two"; break;
-                    case 3: fileName += "three"; break;
-                    case 4: fileName += "four"; break;
-                    case 5: fileName += "five"; break;
-                    case 6: fileName += "six"; break;
-                    case 7: fileName +=  "seven"; break;
-                    case 8: fileName += "eight"; break;
-                    case 9: fileName += "nine"; break;
-                    case 10: fileName += "ten"; break;
-                    case 11: fileName += "jack"; break;
-                    case 12: fileName += "queen"; break;
-                    case 13: fileName += "king"; break;
-                }
-                fileName += "_of_";
-                switch (card.getRank()) {
-                    case "hearts": fileName += "hearts"; break;
-                    case "diamonds": fileName += "diamonds"; break;
-                    case "clubs": fileName += "clubs"; break;
-                    case "spades": fileName += "spades"; break;
-                }
+//    public void updateHandImages(ArrayList<FishCard> hand, ImageView[] imageViews) {
+//        int numCards = hand.size();
+//        for (int i = 0; i < imageViews.length; i++) {
+//            if (i < numCards) {
+//                FishCard card = hand.get(i);
+//                String fileName = "";
+//                switch (card.getValue()) {
+//                    case 1: fileName += "ace"; break;
+//                    case 2: fileName += "two"; break;
+//                    case 3: fileName += "three"; break;
+//                    case 4: fileName += "four"; break;
+//                    case 5: fileName += "five"; break;
+//                    case 6: fileName += "six"; break;
+//                    case 7: fileName +=  "seven"; break;
+//                    case 8: fileName += "eight"; break;
+//                    case 9: fileName += "nine"; break;
+//                    case 10: fileName += "ten"; break;
+//                    case 11: fileName += "jack"; break;
+//                    case 12: fileName += "queen"; break;
+//                    case 13: fileName += "king"; break;
+//                }
+//                fileName += "_of_";
+//                switch (card.getRank()) {
+//                    case "hearts": fileName += "hearts"; break;
+//                    case "diamonds": fileName += "diamonds"; break;
+//                    case "clubs": fileName += "clubs"; break;
+//                    case "spades": fileName += "spades"; break;
+//                }
+//
+//                // sets the ImageViews on each card to the corresponding filename
+//                int imageResource = getResources().getIdentifier(fileName, "drawable", getPackageName());
+//                imageViews[i].setImageResource(imageResource);
+//                imageViews[i].setVisibility(View.VISIBLE);
+//            }
+//            else {
+//                // hide the card if there is no card to display
+//                imageViews[i].setVisibility(View.INVISIBLE);
+//            }
+//        }
+//    }
 
-                // sets the ImageViews on each card to the corresponding filename
-                int imageResource = getResources().getIdentifier(fileName, "drawable", getPackageName());
-                imageViews[i].setImageResource(imageResource);
-                imageViews[i].setVisibility(View.VISIBLE);
-            }
-            else {
-                // hide the card if there is no card to display
-                imageViews[i].setVisibility(View.INVISIBLE);
-            }
-        }
-    }
+
 }
 
 
