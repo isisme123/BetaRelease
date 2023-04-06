@@ -1,5 +1,7 @@
 package com.example.gofishgui.fish;
 
+import com.example.gofishgui.activities.MainActivity;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -11,12 +13,14 @@ public class FishDumbAI {
     int value;
     FishActionObject fishActionObject;
     private fishGameState fish = fishGameState.getInstance();
+    private MainActivity mainActivity;
 
-    public FishDumbAI(ArrayList<FishCard> humanHand, ArrayList<FishCard> computerHand, ArrayList<FishCard> deck) {
+    public FishDumbAI(ArrayList<FishCard> humanHand, ArrayList<FishCard> computerHand, ArrayList<FishCard> deck,
+                      MainActivity mainActivity) {
         this.humanHand = fish.humanHand;
         this.computerHand = fish.computerHand;
         this.deck = fish.deck;
-        this.fishActionObject = new FishActionObject(fish.computerHand, fish.humanHand, fish.deck);
+        this.fishActionObject = new FishActionObject(fish.computerHand, fish.humanHand, fish.deck, mainActivity);
         //this.fish = new fishGameState();
 
     }

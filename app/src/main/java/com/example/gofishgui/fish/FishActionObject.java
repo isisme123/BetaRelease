@@ -1,5 +1,10 @@
 package com.example.gofishgui.fish;
 
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+
+import com.example.gofishgui.activities.MainActivity;
+
 import java.util.ArrayList;
 
 public class FishActionObject {
@@ -8,14 +13,17 @@ public class FishActionObject {
     private ArrayList<FishCard> otherHand;
     private ArrayList<FishCard> deck;
     private fishGameState fish = fishGameState.getInstance();
+    private MainActivity mainActivity;
 
 
 
     // constructor
-    public FishActionObject(ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand, ArrayList<FishCard> deck) {
+    public FishActionObject(ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand, ArrayList<FishCard> deck,
+                            MainActivity mainActivity) {
         this.currHand = currHand;
         this.otherHand = otherHand;
         this.deck = deck;
+        this.mainActivity = mainActivity;
     }
 
     // askforcard method

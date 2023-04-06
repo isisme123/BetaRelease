@@ -1,5 +1,7 @@
 package com.example.gofishgui.fish;
 
+import com.example.gofishgui.activities.MainActivity;
+
 import java.util.ArrayList;
 
 public class FishSmartAI {
@@ -9,12 +11,15 @@ public class FishSmartAI {
     private ArrayList<FishCard> deck;
     int value;
     FishActionObject fishActionObject;
+    private MainActivity mainActivity;
 
-    public FishSmartAI(ArrayList<FishCard> humanHand, ArrayList<FishCard> computerHand, ArrayList<FishCard> deck) {
+    public FishSmartAI(ArrayList<FishCard> humanHand, ArrayList<FishCard> computerHand, ArrayList<FishCard> deck,
+                       MainActivity mainActivity) {
         this.humanHand = humanHand;
         this.computerHand = computerHand;
         this.deck = deck;
-        this.fishActionObject = new FishActionObject(humanHand, computerHand, deck);
+        this.fishActionObject = new FishActionObject(humanHand, computerHand, deck, mainActivity);
+        this.mainActivity = mainActivity;
 
     }
     public boolean dumbAsk() {

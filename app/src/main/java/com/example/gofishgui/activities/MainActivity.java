@@ -3,6 +3,7 @@ package com.example.gofishgui.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<FishCard> computerHand; // arraylist for the hand
     ArrayList<FishCard> deck; // arraylist for the deck
     private fishGameState fish = fishGameState.getInstance(); //instance of fish game state
+    private MainActivity mainActivity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,24 +34,25 @@ public class MainActivity extends AppCompatActivity {
 
         // (TEST), initializes a game, will put the following into startGame method later!!
         // image views for human cards array
-        ImageView[] pc = new ImageView[7];
+        ArrayList<ImageView> pc = new ArrayList<>();
         // ask button array
-        Button[] b = new Button[pc.length];
+        ArrayList<Button> b = new ArrayList<>();
         // populates button and imageview
-        pc[0] = findViewById(R.id.player_card1);
-        pc[1] = findViewById(R.id.player_card2);
-        pc[2] = findViewById(R.id.player_card3);
-        pc[3] = findViewById(R.id.player_card4);
-        pc[4] = findViewById(R.id.player_card5);
-        pc[5] = findViewById(R.id.player_card6);
-        pc[6] = findViewById(R.id.player_card7);
-        b[0] = findViewById(R.id.askbutton1);
-        b[1] = findViewById(R.id.askbutton2);
-        b[2] = findViewById(R.id.askbutton3);
-        b[3] = findViewById(R.id.askbutton4);
-        b[4] = findViewById(R.id.askbutton5);
-        b[5] = findViewById(R.id.askbutton6);
-        b[6] = findViewById(R.id.askbutton7);
+        pc.add(findViewById(R.id.player_card1));
+        pc.add(findViewById(R.id.player_card2));
+        pc.add(findViewById(R.id.player_card3));
+        pc.add(findViewById(R.id.player_card4));
+        pc.add(findViewById(R.id.player_card5));
+        pc.add(findViewById(R.id.player_card6));
+        pc.add(findViewById(R.id.player_card7));
+        b.add(findViewById(R.id.askbutton1));
+        b.add(findViewById(R.id.askbutton2));
+        b.add(findViewById(R.id.askbutton3));
+        b.add(findViewById(R.id.askbutton4));
+        b.add(findViewById(R.id.askbutton5));
+        b.add(findViewById(R.id.askbutton6));
+        b.add(findViewById(R.id.askbutton7));
+
         // generates 52 cards
         ArrayList<FishCard> cards = new ArrayList<>();
         // creates deck from cards
@@ -60,19 +63,20 @@ public class MainActivity extends AppCompatActivity {
         deck.dealCards();
         // gets human hand
         ArrayList<FishCard> humanHand = deck.getHumanHand();
-        fish.setHumanHand(humanHand); //updates the humanHand in fishGameState
+        //updates the humanHand in fishGameState
+        fish.setHumanHand(humanHand);
         // gets computer hand
         ArrayList<FishCard> computerHand = deck.getComputerHand();
         fish.setComputerHand(computerHand);; //updates the computerHand in fishGameState
         //gets the deck or go fish pile
         ArrayList<FishCard> myDeck = deck.getDeck();
         fish.setDeck(myDeck); //updates the deck in fishGameState
-        // updates images for human hand (not required for computer hand cuz it is hidden the whole game
-        updateHandImages(humanHand, pc);
+        // sets images for human hand
+        setHandImages(humanHand, pc);
         // creates FishHand for the human and also makes the buttons show
-        FishHand humanPlayerHand = new FishHand(this, pc, b, humanHand, computerHand, myDeck);
+        FishHand hand = new FishHand(this, pc, b, humanHand, computerHand, myDeck, this);
         LinearLayout layout = findViewById(R.id.layout_main);
-        layout.addView(humanPlayerHand);
+        layout.addView(hand);
     }
 
     @Override
@@ -101,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     private class GameLoop implements Runnable {
 
         private boolean isRunning;
-        FishDumbAI dumbAI = new FishDumbAI(userHand, computerHand, deck);
+        FishDumbAI dumbAI = new FishDumbAI(userHand, computerHand, deck, mainActivity);
 
         @Override
         public void run() {
@@ -127,15 +131,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
-
     // Helper method that updates the images on the cards
-    public void updateHandImages(ArrayList<FishCard> hand, ImageView[] imageViews) {
+    public void setHandImages(ArrayList<FishCard> hand, ArrayList<ImageView> imageViews) {
         int numCards = hand.size();
-        for (int i = 0; i < imageViews.length; i++) {
+        for (int i = 0; i < imageViews.size(); i++) {
+            FishCard card = hand.get(i);
+            ImageView image = imageViews.get(i);
             if (i < numCards) {
-                FishCard card = hand.get(i);
                 String fileName = "";
                 switch (card.getValue()) {
                     case 1: fileName += "ace"; break;
@@ -162,15 +164,53 @@ public class MainActivity extends AppCompatActivity {
 
                 // sets the ImageViews on each card to the corresponding filename
                 int imageResource = getResources().getIdentifier(fileName, "drawable", getPackageName());
-                imageViews[i].setImageResource(imageResource);
-                imageViews[i].setVisibility(View.VISIBLE);
+                image.setImageResource(imageResource);
+                image.setVisibility(View.VISIBLE);
             }
             else {
                 // hide the card if there is no card to display
-                imageViews[i].setVisibility(View.INVISIBLE);
+                image.setVisibility(View.INVISIBLE);
             }
         }
     }
+
+//    public void updateHandImages(ArrayList<FishCard> hand, ArrayList<FishCard> humanHand,
+//                                 ArrayList<FishCard> computerHand, ArrayList<ImageView> handImages) {
+//        int handSize = hand.size();
+//        int imageViewsSize = handImages.size();
+//
+//        if (handSize < imageViewsSize) {
+//            // Remove extra image views
+//            for (int i = imageViewsSize - 1; i >= handSize; i--) {
+//                ImageView imageView = handImages.get(i);
+//                imageView.setVisibility(View.GONE);
+//                handImages.remove(i);
+//            }
+//        } else if (handSize > imageViewsSize) {
+//            // Add new image views
+//            for (int i = imageViewsSize; i < handSize; i++) {
+//                ImageView imageView = new ImageView(this);
+//                imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+//                setHandImages(hand, handImages);
+//                handImages.add(imageView);
+//                // Add the image view to the appropriate layout
+//                if (hand == humanHand) {
+//                    LinearLayout playerHand = findViewById(R.id.player_hand);
+//                    playerHand.addView(imageView); }
+////                } else {
+////                    computerHandLayout.addView(imageView);
+////                }
+//            }
+//        }
+//
+//        // Set the appropriate image for each card
+//        for (int i = 0; i < handSize; i++) {
+//            ImageView imageView = handImages.get(i);
+//            FishCard card = hand.get(i);
+//            setHandImages(hand, handImages);
+//            imageView.setVisibility(View.VISIBLE);
+//        }
+//    }
 }
 
 

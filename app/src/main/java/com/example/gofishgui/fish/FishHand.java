@@ -6,15 +6,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.gofishgui.activities.MainActivity;
+
 import java.util.ArrayList;
 
 public class FishHand extends LinearLayout implements View.OnClickListener {
     private Context c; // context
-    private ImageView[] pc; // image views for human cards
-    private Button[] b; // button array
+    private ArrayList<ImageView> pc; // image views for human cards
+    private ArrayList<Button> b; // button array
     private int value; // card value that was asked for
     private String rank; // card rank that was asked for
     private Button lastClickedButton;
+    MainActivity mainActivity;
     ArrayList<FishCard> currHand; // arraylist for the hand
     ArrayList<FishCard> otherHand; // arraylist for the hand
     ArrayList<FishCard> deck; // arraylist for the deck
@@ -22,9 +25,9 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
     private fishGameState fish = fishGameState.getInstance();; // instance of fishGameState
 
 
-
     // FishHand constructor
-    public FishHand(Context c, ImageView[] pc, Button[] b, ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand, ArrayList<FishCard> deck) {
+    public FishHand(Context c, ArrayList<ImageView> pc, ArrayList<Button> b, ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand, ArrayList<FishCard> deck,
+                    MainActivity mainActivity) {
         super(c);
         this.c = c;
         this.pc = pc;
@@ -32,12 +35,15 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
         this.currHand = currHand; // current player's hand
         this.otherHand = otherHand; // other player's hand
         this.deck = deck; // the deck or go fish pile
-        this.fishActionObject = new FishActionObject(currHand, otherHand, deck); // create instance of FishActionObject
+        this.fishActionObject = new FishActionObject(currHand, otherHand, deck, mainActivity); // create instance of FishActionObject
+        this.mainActivity = mainActivity;
         //this.fish = new fishGameState(); // create instance of game state
-        for (int i = 0; i < pc.length; i++) {
-            pc[i].setOnClickListener(this);
-            b[i].setOnClickListener(this);
-            b[i].setVisibility(INVISIBLE);
+        for (int i = 0; i < pc.size(); i++) {
+            ImageView cardPicture = pc.get(i);
+            Button button = b.get(i);
+            cardPicture.setOnClickListener(this);
+            button.setOnClickListener(this);
+            button.setVisibility(INVISIBLE);
         }
         setOnClickListener(this);
 
@@ -65,17 +71,21 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
             System.out.println("Cannot go, not your turn!");
             return;
         } else if (v instanceof ImageView) { // if card is clicked
-            for (int i = 0; i < pc.length; i++) {
-                if (v == pc[i]) {
-                    b[i].setVisibility(VISIBLE); // show a button
-                    lastClickedButton = b[i];
+            for (int i = 0; i < pc.size(); i++) {
+                ImageView cardPicture = pc.get(i);
+                Button button = b.get(i);
+                if (v == cardPicture) {
+                    button.setVisibility(VISIBLE); // show a button
+                    lastClickedButton = button;
                 } else {
-                    b[i].setVisibility(INVISIBLE);
+                    button.setVisibility(INVISIBLE);
                 }
             }
         } else if (v instanceof Button) { // if the button is clicked
-            for (int i = 0; i < b.length; i++) {
-                if (v == b[i]) { // go through button array and find card value that was asked for
+            for (int i = 0; i < b.size(); i++) {
+                ImageView cardPicture = pc.get(i);
+                Button button = b.get(i);
+                if (v == button) { // go through button array and find card value that was asked for
                     switch(i) {
                         case 0:
                         case 1:
@@ -109,6 +119,8 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
                             fish.setComputerHand(otherHand);; //updates the computerHand in fishGameState
                             fish.setDeck(deck); //updates the deck in fishGameState
 
+//                             mainActivity.updateHandImages(currHand, currHand, otherHand, pc);
+
                             break;
                     }
                 }
@@ -116,8 +128,10 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
             lastClickedButton.setVisibility(INVISIBLE);
             lastClickedButton = null;
         } else { // if card is not clicked
-            for (int i = 0; i < b.length; i++) {
-                b[i].setVisibility(INVISIBLE);
+            for (int i = 0; i < b.size(); i++) {
+                ImageView cardPicture = pc.get(i);
+                Button button = b.get(i);
+                button.setVisibility(INVISIBLE);
             }
             if (lastClickedButton != null) {
                 lastClickedButton.setVisibility(INVISIBLE);
