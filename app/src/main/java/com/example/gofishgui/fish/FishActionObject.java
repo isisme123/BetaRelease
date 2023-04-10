@@ -62,6 +62,42 @@ public class FishActionObject {
         }
         return card;
     }
+    public void checkForFour(ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand, int value) {
+        int playerCount = 0;
+        int opponentCount = 0;
+        ArrayList<FishCard> cardsToRemove = new ArrayList<>();
+        for (FishCard card : currHand) {
+            if (card.getValue() == value) {
+                playerCount++;
+            }
+        }
+        for (FishCard card : otherHand) {
+            if (card.getValue() == value) {
+                opponentCount++;
+            }
+        }
+        if (playerCount == 4) {
+            fish.playerScore += 4;
+            for (FishCard card : currHand) {
+                if (card.getValue() == value) {
+                    cardsToRemove.add(card);
+                }
+            }
+        }
+        if (opponentCount == 4) {
+            fish.opponentScore += 4;
+            for (FishCard card : otherHand) {
+                if (card.getValue() == value) {
+                    cardsToRemove.add(card);
+                }
+            }
+        }
+        if (!cardsToRemove.isEmpty()) {
+            currHand.removeAll(cardsToRemove);
+            otherHand.removeAll(cardsToRemove);
+        }
+    }
+
 
 }
 

@@ -9,6 +9,29 @@
 
     <!-- The deck of cards in the middle -->
     <LinearLayout
+        android:id="@+id/Scores"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="50"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/playerPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Player Score:" />
+
+        <TextView
+            android:id="@+id/opponentPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Opponent Score:" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/opponent_hand"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

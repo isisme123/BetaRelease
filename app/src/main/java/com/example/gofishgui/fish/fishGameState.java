@@ -12,9 +12,9 @@ public class fishGameState {
     public ArrayList<FishCard> humanHand; //Map of the player ID to their hand of cards
     public ArrayList<FishCard> computerHand;
     //private Map<Integer, Integer> playerScores; // ..scores?!
-    private int playerScore;
-    private int opponentScore;
-    private boolean gameOver;
+    public int playerScore;
+    public int opponentScore;
+    public boolean gameOver;
     //private FishDeck deck;
 
 //    public fishGameState(int currentPlayer, List<FishCard> deck, List<FishCard> humanHand, List<FishCard> computerHand,

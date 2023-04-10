@@ -44,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
         // ask button array
         //Button[] b = new Button[pc.length];
         Button z = findViewById(R.id.askButton);
+        TextView player = findViewById(R.id.playerPoints);
+        TextView opponent = findViewById(R.id.opponentPoints);
+        player.setText("Player Score: " + fish.getPlayerScore());
+        opponent.setText("Opponent Score: " + fish.getOpponentScore());
         // populates button and imageview
         //pc[0] = findViewById(R.id.player_card1);
 //        pc[1] = findViewById(R.id.player_card2);
@@ -76,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
         //gets the deck or go fish pile
         ArrayList<FishCard> myDeck = deck.getDeck();
         fish.setDeck(myDeck); //updates the deck in fishGameState
+        //set the score
+        fish.setPlayerScore(fish.getPlayerScore());
+        fish.setOpponentScore(fish.getOpponentScore());
+
         // updates images for human hand (not required for computer hand cuz it is hidden the whole game
         //updateHandImages(humanHand, pc);
         // creates FishHand for the human and also makes the buttons show
@@ -191,6 +199,13 @@ public class MainActivity extends AppCompatActivity {
                 // call askForCard() method on fishActionObject
                 FishActionObject fishActionObject = new FishActionObject(humanHand, computerHand, myDeck);
                 fishActionObject.askForCard(value, 0);
+                fishActionObject.checkForFour(fish.humanHand, fish.computerHand,value);
+
+                //update the score textView
+                int humanScore = fish.getPlayerScore();
+                int computerScore = fish.getOpponentScore();
+                player.setText("Player Score: " + humanScore);
+                opponent.setText("Opponent Score: " + computerScore);
 
                 // (TEST) SOP hands after asking for a card
                 System.out.print("Current hand after ask: ");

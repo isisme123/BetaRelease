@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.gofishgui.R;
 import com.example.gofishgui.activities.MainActivity;
@@ -26,6 +27,9 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
     private fishGameState fish = fishGameState.getInstance();; // instance of fishGameState
     private int position;
     Button ask = findViewById(R.id.askButton);
+    private TextView humanScoreTextView;
+    private TextView AIScoreTextView;
+
 
 
     // FishHand constructor
@@ -38,6 +42,8 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
         this.otherHand = otherHand; // other player's hand
         this.deck = deck; // the deck or go fish pile
         this.fishActionObject = new FishActionObject(currHand, otherHand, deck); // create instance of FishActionObject
+        this.humanScoreTextView = humanScoreTextView;
+        this.AIScoreTextView = AIScoreTextView;
         //this.fish = new fishGameState(); // create instance of game state
         for (int i = 0; i < pc.size(); i++) {
             ImageView cardPicture = pc.get(i);
@@ -72,8 +78,11 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
         }
              //get the card value
                             value = position;
-                            // call askForCard() method on fishActionObject
+                            // call askForCard() method in fishActionObject
                             fishActionObject.askForCard(value, 0);
+
+                            //call checkForFour() method
+                            fishActionObject.checkForFour(fish.humanHand, fish.computerHand, value);
 
                             // (TEST) SOP hands after asking for a card
                             System.out.print("Current hand after ask: ");

@@ -33,7 +33,8 @@ public class FishDumbAI {
     public boolean dumbAsk() {
 
         value = randomVal();
-        fishActionObject.askForCard(value, 1);
+        fishActionObject.askForCard(value, 0);
+        fishActionObject.checkForFour(fish.humanHand, fish.computerHand, value);
 
         System.out.print("User hand after ask: ");
         for (FishCard card : humanHand) {
@@ -58,39 +59,4 @@ public class FishDumbAI {
         return true;
     }
 
-
-
-
-
-
-    //    public FishActionObject askForCard(int value, String rank, ArrayList<FishCard> otherHand) {
-//        FishActionObject actionObject = new FishActionObject(new ArrayList<>());
-//        if (otherHand != null) {
-//            boolean hasCard = actionObject.askForCard(value, rank, otherHand);
-//            if (hasCard) {
-//                // Remove the matching card from the hand of the other player
-//                otherHand.removeIf(card -> card.getValue() == value && card.getRank().equals(rank));
-//            } else {
-//                // If the other player does not have the card, draw a card from the deck
-//                FishDeck deck = FishDeck.getInstance();
-//                FishCard drawnCard = deck.drawCard("computer");
-//                if (drawnCard != null) {
-//                    hand.add(drawnCard);
-//                }
-//            }
-//        }
-//        return actionObject;
-//    }
-//
-//    public boolean checkForFour(int value) {
-//        return new FishActionObject(hand).checkForFour(value);
-//    }
-//
-//    public void removeCard(int value, String rank) {
-//        new FishActionObject(hand).removeCard(value, rank);
-//    }
-//
-//    public ArrayList<FishCard> getHand() {
-//        return hand;
-//    }
 }
