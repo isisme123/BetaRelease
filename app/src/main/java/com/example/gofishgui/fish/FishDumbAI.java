@@ -33,8 +33,9 @@ public class FishDumbAI {
     public boolean dumbAsk() {
 
         value = randomVal();
-        fishActionObject.askForCard(value, 0);
+        fishActionObject.askForCard(value, 1);
         fishActionObject.checkForFour(fish.humanHand, fish.computerHand, value);
+        fish.isGameOver(); //call isGameOver
 
         System.out.print("User hand after ask: ");
         for (FishCard card : humanHand) {

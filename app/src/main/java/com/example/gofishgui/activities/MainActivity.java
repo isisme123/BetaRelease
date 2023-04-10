@@ -2,6 +2,8 @@ package com.example.gofishgui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,13 +26,15 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private GameLoop gameLoop;
+    public GameLoop gameLoop;
     private Thread gameThread;
     ArrayList<FishCard> userHand; // arraylist for the hand
     ArrayList<FishCard> computerHand; // arraylist for the hand
     ArrayList<FishCard> deck; // arraylist for the deck
     private fishGameState fish = fishGameState.getInstance(); //instance of fish game state
     private int pos;
+    //GameLoop gameLoop = new GameLoop(MainActivity.this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         //gets the deck or go fish pile
         ArrayList<FishCard> myDeck = deck.getDeck();
         fish.setDeck(myDeck); //updates the deck in fishGameState
-        //set the score
+        //update the score
         fish.setPlayerScore(fish.getPlayerScore());
         fish.setOpponentScore(fish.getOpponentScore());
 
@@ -90,8 +94,6 @@ public class MainActivity extends AppCompatActivity {
 //        FishHand humanPlayerHand = new FishHand(this, pc, b, humanHand, computerHand, myDeck);
 //        LinearLayout layout = findViewById(R.id.layout_main);
 //        layout.addView(humanPlayerHand);
-
-
         TextView cardZ = (TextView) findViewById(R.id.textView);
         String cardSet = "";
         for(int i = 0; i < fish.humanHand.size(); ++i) {
@@ -199,8 +201,10 @@ public class MainActivity extends AppCompatActivity {
                 // call askForCard() method on fishActionObject
                 FishActionObject fishActionObject = new FishActionObject(humanHand, computerHand, myDeck);
                 fishActionObject.askForCard(value, 0);
+                //call checkForFour
                 fishActionObject.checkForFour(fish.humanHand, fish.computerHand,value);
-
+                //call isGameOver method
+                //fish.isGameOver();
                 //update the score textView
                 int humanScore = fish.getPlayerScore();
                 int computerScore = fish.getOpponentScore();
@@ -226,6 +230,8 @@ public class MainActivity extends AppCompatActivity {
                 fish.setHumanHand(humanHand); //updates the humanHand in fishGameState
                 fish.setComputerHand(computerHand);; //updates the computerHand in fishGameState
                 fish.setDeck(myDeck); //updates the deck in fishGameState
+                fish.setPlayerScore(fish.getPlayerScore());
+                fish.setOpponentScore(fish.getOpponentScore());
             }
         });
 
@@ -255,9 +261,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class GameLoop implements Runnable {
+    public class GameLoop implements Runnable {
 
         private boolean isRunning;
+        private Context context;
         FishDumbAI dumbAI = new FishDumbAI(userHand, computerHand, deck);
 
         @Override
@@ -269,7 +276,6 @@ public class MainActivity extends AppCompatActivity {
                 if (fish.getCurrentPlayer() != 0) {
                     dumbAI.dumbAsk();
                 }
-
                 // Sleep for a short amount of time to limit the frame rate
                 try {
                     Thread.sleep(2000);
@@ -282,11 +288,17 @@ public class MainActivity extends AppCompatActivity {
         public void stop() {
             isRunning = false;
         }
+        public void update() {
+            //fish.update();
+            fish.isGameOver();
+            if(fish.isGameOver()) {
+                Intent intent = new Intent(MainActivity.this, EndActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }
+
     }
-
-
-
-
 
     // Helper method that updates the images on the cards
 //    public void updateHandImages(ArrayList<FishCard> hand, ImageView[] imageViews) {
@@ -329,7 +341,6 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        }
 //    }
-
 
 }
 

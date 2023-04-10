@@ -97,7 +97,15 @@ public class FishActionObject {
             otherHand.removeAll(cardsToRemove);
         }
     }
-
-
+//    public boolean isGameOver() {
+//        int playerScore = fish.playerScore;
+//        int opponentScore = fish.opponentScore;
+//        if (playerScore > opponentScore || playerScore == opponentScore) {
+//            return true;
+//        }
+//        else {
+//            return false;
+//        }
+//    }
 }
 
