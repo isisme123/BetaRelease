@@ -35,7 +35,7 @@ public class FishDumbAI {
         value = randomVal();
         fishActionObject.askForCard(value, 1);
         fishActionObject.checkForFour(fish.humanHand, fish.computerHand, value);
-        fish.isGameOver(); //call isGameOver
+        //fish.isGameOver(); //call isGameOver
 
         System.out.print("User hand after ask: ");
         for (FishCard card : humanHand) {

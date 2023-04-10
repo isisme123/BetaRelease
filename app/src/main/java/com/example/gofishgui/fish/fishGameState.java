@@ -72,17 +72,17 @@ fishGameState() {
 //    public boolean isGamerOver() {
 //        return gameOver;
 //    }
-public boolean isGameOver() {
-    if (deck.isEmpty() && humanHand.isEmpty() && computerHand.isEmpty()) {
-        //return true;
-        if (playerScore > opponentScore || playerScore == opponentScore) {
-            return true;
-        }
-    } else {
-        return false;
-    }
-    return true;
-}
+//public boolean isGameOver() {
+//    if (deck.isEmpty() && humanHand.isEmpty() && computerHand.isEmpty()) {
+//        //return true;
+//        if (playerScore > opponentScore || playerScore == opponentScore) {
+//            return true;
+//        }
+//    } else {
+//        return false;
+//    }
+//    return true;
+//}
 
 
     public List<FishCard> getDeck() {

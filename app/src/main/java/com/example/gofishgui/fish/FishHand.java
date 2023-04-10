@@ -84,9 +84,6 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
                             //call checkForFour() method
                             fishActionObject.checkForFour(fish.humanHand, fish.computerHand, value);
 
-                            //call isGame over method
-                            fish.isGameOver();
-
                             // (TEST) SOP hands after asking for a card
                             System.out.print("Current hand after ask: ");
                             for (FishCard card : currHand) {

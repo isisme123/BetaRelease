@@ -8,6 +8,7 @@
     android:background="#0a6c03">
 
     <!-- The deck of cards in the middle -->
+
     <LinearLayout
         android:id="@+id/Scores"
         android:layout_width="match_parent"
@@ -142,6 +143,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:text="TextView" />
+
+        <LinearLayout
+            android:id="@+id/TheEnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/endGameButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="End Game" />
+        </LinearLayout>
     </LinearLayout>
 
     <!-- The opponent's hand at the top -->

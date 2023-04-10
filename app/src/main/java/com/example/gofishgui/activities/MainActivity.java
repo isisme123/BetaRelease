@@ -173,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
+
         });
 
         z.setOnClickListener(new View.OnClickListener() {
@@ -234,9 +235,24 @@ public class MainActivity extends AppCompatActivity {
                 fish.setOpponentScore(fish.getOpponentScore());
             }
         });
+        // Find the endgamebutton view
+        Button endgamebutton = findViewById(R.id.endGameButton);
 
+        // Set OnClickListener to endgamebutton
+        endgamebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // End the game
+                endGame();
+            }
+        });
+        //end of onCreate
     }
-
+    // End the game and switch to EndActivity
+    private void endGame() {
+        Intent intent = new Intent(this, EndActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onStart() {
@@ -288,15 +304,16 @@ public class MainActivity extends AppCompatActivity {
         public void stop() {
             isRunning = false;
         }
-        public void update() {
-            //fish.update();
-            fish.isGameOver();
-            if(fish.isGameOver()) {
-                Intent intent = new Intent(MainActivity.this, EndActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        }
+//        public void update() {
+//            //fish.update();
+//            FishActionObject fishActionObject = new FishActionObject(userHand, computerHand, deck);
+//            fishActionObject.isGameOver();
+//            if(fishActionObject.isGameOver()) {
+//                Intent intent = new Intent(MainActivity.this, EndActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        }
 
     }
 

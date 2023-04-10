@@ -46,22 +46,35 @@ public class FishActionObject {
         }
     }
 
+//    public FishCard drawCard(int playerIdx) {
+//
+//        FishCard card;
+//        if (deck != null) {
+//            card = deck.remove(0);
+//        } else {
+//            return null;
+//        }
+//
+//        if (playerIdx == 0) {
+//            fish.humanHand.add(card);
+//        } else {
+//            fish.computerHand.add(card);
+//        }
+//        return card;
+//    }
     public FishCard drawCard(int playerIdx) {
-
-        FishCard card;
-        if (deck != null) {
-            card = deck.remove(0);
-        } else {
-            return null;
-        }
-
+        FishCard card = null;
+        if (!deck.isEmpty()) {
+        card = deck.remove(0);
         if (playerIdx == 0) {
             fish.humanHand.add(card);
         } else {
             fish.computerHand.add(card);
         }
+        }
         return card;
     }
+
     public void checkForFour(ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand, int value) {
         int playerCount = 0;
         int opponentCount = 0;
@@ -107,5 +120,16 @@ public class FishActionObject {
 //            return false;
 //        }
 //    }
+public boolean isGameOver() {
+    if (deck.isEmpty() && currHand.isEmpty() && otherHand.isEmpty()) {
+        //return true;
+        if (fish.playerScore > fish.opponentScore || fish.playerScore == fish.opponentScore) {
+            return true;
+        }
+    } else {
+        return false;
+    }
+    return true;
+}
 }
 
