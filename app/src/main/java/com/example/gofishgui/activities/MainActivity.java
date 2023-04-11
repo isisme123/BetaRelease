@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -19,7 +18,7 @@ import com.example.gofishgui.fish.FishActionObject;
 import com.example.gofishgui.fish.FishCard;
 import com.example.gofishgui.fish.FishDeck;
 import com.example.gofishgui.fish.FishDumbAI;
-import com.example.gofishgui.fish.FishHand;
+import com.example.gofishgui.fish.FishSmartAI;
 import com.example.gofishgui.fish.fishGameState;
 
 import java.util.ArrayList;
@@ -202,8 +201,6 @@ public class MainActivity extends AppCompatActivity {
                 // call askForCard() method on fishActionObject
                 FishActionObject fishActionObject = new FishActionObject(humanHand, computerHand, myDeck);
                 fishActionObject.askForCard(value, 0);
-                //call checkForFour
-                fishActionObject.checkForFour(fish.humanHand, fish.computerHand,value);
                 //call isGameOver method
                 //fish.isGameOver();
                 //update the score textView
@@ -233,6 +230,12 @@ public class MainActivity extends AppCompatActivity {
                 fish.setDeck(myDeck); //updates the deck in fishGameState
                 fish.setPlayerScore(fish.getPlayerScore());
                 fish.setOpponentScore(fish.getOpponentScore());
+                TextView cardZ = (TextView) findViewById(R.id.textView);
+                String cardSet = "";
+                for(int i = 0; i < fish.humanHand.size(); ++i) {
+                    cardSet = cardSet + fish.humanHand.get(i).getValue() + ", ";
+                }
+                cardZ.setText(cardSet);
             }
         });
         // Find the endgamebutton view
@@ -282,6 +285,7 @@ public class MainActivity extends AppCompatActivity {
         private boolean isRunning;
         private Context context;
         FishDumbAI dumbAI = new FishDumbAI(userHand, computerHand, deck);
+        FishSmartAI smartAI = new FishSmartAI(userHand, computerHand, deck);
 
         @Override
         public void run() {
@@ -290,8 +294,9 @@ public class MainActivity extends AppCompatActivity {
             while (isRunning) {
 
                 if (fish.getCurrentPlayer() != 0) {
-                    dumbAI.dumbAsk();
+                    smartAI.smartAsk();
                 }
+
                 // Sleep for a short amount of time to limit the frame rate
                 try {
                     Thread.sleep(2000);
