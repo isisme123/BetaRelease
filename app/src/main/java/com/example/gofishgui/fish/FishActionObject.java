@@ -110,26 +110,16 @@ public class FishActionObject {
             otherHand.removeAll(cardsToRemove);
         }
     }
-//    public boolean isGameOver() {
-//        int playerScore = fish.playerScore;
-//        int opponentScore = fish.opponentScore;
-//        if (playerScore > opponentScore || playerScore == opponentScore) {
+//public boolean isGameOver() {
+//    if (deck.isEmpty() && currHand.isEmpty() && otherHand.isEmpty()) {
+//        //return true;
+//        if (fish.playerScore > fish.opponentScore || fish.playerScore == fish.opponentScore) {
 //            return true;
 //        }
-//        else {
-//            return false;
-//        }
+//    } else {
+//        return false;
 //    }
-public boolean isGameOver() {
-    if (deck.isEmpty() && currHand.isEmpty() && otherHand.isEmpty()) {
-        //return true;
-        if (fish.playerScore > fish.opponentScore || fish.playerScore == fish.opponentScore) {
-            return true;
-        }
-    } else {
-        return false;
-    }
-    return true;
-}
+//    return true;
+//}
 }
 

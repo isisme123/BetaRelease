@@ -24,12 +24,12 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
     ArrayList<FishCard> otherHand; // arraylist for the hand
     ArrayList<FishCard> deck; // arraylist for the deck
     FishActionObject fishActionObject; // instance of FishActionObject
-    private fishGameState fish = fishGameState.getInstance();; // instance of fishGameState
+    private fishGameState fish = fishGameState.getInstance();
+    ; // instance of fishGameState
     private int position;
     Button ask = findViewById(R.id.askButton);
     private TextView humanScoreTextView;
     private TextView AIScoreTextView;
-
 
 
     // FishHand constructor
@@ -76,34 +76,38 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
             System.out.println("Cannot go, not your turn!");
             return;
         }
-             //get the card value
-                            value = position;
-                            // call askForCard() method in fishActionObject
-                            fishActionObject.askForCard(value, 0);
+        //get the card value
+        value = position;
+        // call askForCard() method in fishActionObject
+        fishActionObject.askForCard(value, 0);
 
-                            //call checkForFour() method
-                            fishActionObject.checkForFour(fish.humanHand, fish.computerHand, value);
+        //call checkForFour() method
+        fishActionObject.checkForFour(fish.humanHand, fish.computerHand, value);
 
-                            // (TEST) SOP hands after asking for a card
-                            System.out.print("Current hand after ask: ");
-                            for (FishCard card : currHand) {
-                                System.out.print(card.getValue() + " ");
-                            }
-                            System.out.println(" ");
-                            System.out.print("Other hand after ask: ");
-                            for (FishCard card : otherHand) {
-                                System.out.print(card.getValue() + " ");
-                            }
-                            System.out.println(" ");
-                            System.out.print("Deck after ask: ");
-                            for (FishCard card : deck) {
-                                System.out.print(card.getValue() + " ");
-                            }
-                            System.out.println(" ");
-                            fish.setHumanHand(currHand); //updates the humanHand in fishGameState
-                            fish.setComputerHand(otherHand);; //updates the computerHand in fishGameState
-                            fish.setDeck(deck); //updates the deck in fishGameState
+        //call is game over
+        fish.isGameOver();
+
+        // (TEST) SOP hands after asking for a card
+        System.out.print("Current hand after ask: ");
+        for (FishCard card : currHand) {
+            System.out.print(card.getValue() + " ");
         }
+        System.out.println(" ");
+        System.out.print("Other hand after ask: ");
+        for (FishCard card : otherHand) {
+            System.out.print(card.getValue() + " ");
+        }
+        System.out.println(" ");
+        System.out.print("Deck after ask: ");
+        for (FishCard card : deck) {
+            System.out.print(card.getValue() + " ");
+        }
+        System.out.println(" ");
+        fish.setHumanHand(currHand); //updates the humanHand in fishGameState
+        fish.setComputerHand(otherHand);
+        ; //updates the computerHand in fishGameState
+        fish.setDeck(deck); //updates the deck in fishGameState
+    }
 
 //        } else if (v instanceof ImageView) { // if card is clicked
 //            for (int i = 0; i < pc.size(); i++) {
