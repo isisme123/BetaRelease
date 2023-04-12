@@ -22,6 +22,13 @@ public class FishDumbAI {
         //this.fish = new fishGameState();
 
     }
+    public interface OnAskListener{
+        void onAsk(int value);
+    }
+    private OnAskListener listener;
+    public void setOnAskListener(OnAskListener listener) {
+        this.listener = listener;
+    }
 
     //Random number generator for a value from 1-13
     public int randomVal() {
@@ -36,6 +43,11 @@ public class FishDumbAI {
         fishActionObject.askForCard(value, 1);
         fishActionObject.checkForFour(fish.humanHand, fish.computerHand, value);
         //fish.isGameOver(); //call isGameOver
+
+        // Notify the listener that the AI has asked for a card.
+        if (listener != null) {
+            listener.onAsk(value);
+        }
 
         System.out.print("User hand after ask: ");
         for (FishCard card : humanHand) {

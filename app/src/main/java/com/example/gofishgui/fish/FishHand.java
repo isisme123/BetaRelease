@@ -31,6 +31,7 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
     private TextView humanScoreTextView;
     private TextView AIScoreTextView;
 
+    private TextView cardAsked;
 
     // FishHand constructor
     public FishHand(Context c, ArrayList<ImageView> pc, ArrayList<Button> b, ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand, ArrayList<FishCard> deck) {
@@ -44,7 +45,9 @@ public class FishHand extends LinearLayout implements View.OnClickListener {
         this.fishActionObject = new FishActionObject(currHand, otherHand, deck); // create instance of FishActionObject
         this.humanScoreTextView = humanScoreTextView;
         this.AIScoreTextView = AIScoreTextView;
+        this.cardAsked = cardAsked;
         //this.fish = new fishGameState(); // create instance of game state
+
         for (int i = 0; i < pc.size(); i++) {
             ImageView cardPicture = pc.get(i);
             Button button = b.get(i);

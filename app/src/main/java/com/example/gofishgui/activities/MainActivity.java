@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<FishCard> deck; // arraylist for the deck
     private fishGameState fish = fishGameState.getInstance(); //instance of fish game state
     private int pos;
+    int value = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -302,6 +304,7 @@ public class MainActivity extends AppCompatActivity {
                 if (fish.getCurrentPlayer() != 0) {
                     dumbAI.dumbAsk();
                 }
+
                 //create intent for EndActivity (automatically)
                 if (fish.isGameOver() == true) {
                     Intent intent = new Intent(MainActivity.this, EndActivity.class);
