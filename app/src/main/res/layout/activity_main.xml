@@ -13,7 +13,7 @@
         android:id="@+id/Scores"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="50"
+        android:layout_weight="40"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -22,14 +22,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Player Score:" />
+            android:text="Player Score:"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/opponentPoints"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Opponent Score:" />
+            android:text="Opponent Score:"
+            android:textSize="24sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -98,6 +100,24 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/WhatIsAsked"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="20"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/cardAsked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:gravity="center_horizontal"
+            android:text="AI asks:"
+            android:textSize="24sp" />
+    </LinearLayout>
+
     <!-- The player's hand at the bottom -->
 
     <LinearLayout
@@ -144,21 +164,22 @@
             android:layout_weight="0"
             android:text="TextView" />
 
-        <LinearLayout
-            android:id="@+id/TheEnd"
-            android:layout_width="match_parent"
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/TheEnd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/endGameButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:gravity="end"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/endGameButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="End Game" />
-        </LinearLayout>
+            android:text="End Game" />
     </LinearLayout>
 
     <!-- The opponent's hand at the top -->

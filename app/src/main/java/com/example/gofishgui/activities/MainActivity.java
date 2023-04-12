@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         computerHand = new ArrayList<>();
         deck = new ArrayList<>();
 
-
             // (TEST), initializes a game, will put the following into startGame method later!!
             // image views for human cards array
             ArrayList<ImageView> pc = new ArrayList<>();
@@ -51,10 +50,15 @@ public class MainActivity extends AppCompatActivity {
             // ask button array
             //Button[] b = new Button[pc.length];
             Button z = findViewById(R.id.askButton);
+        //show score for both players
             TextView player = findViewById(R.id.playerPoints);
             TextView opponent = findViewById(R.id.opponentPoints);
             player.setText("Player Score: " + fish.getPlayerScore());
             opponent.setText("Opponent Score: " + fish.getOpponentScore());
+
+            //show the card the AI asks
+        TextView cardAsked = findViewById(R.id.cardAsked);
+
             // populates button and imageview
             //pc[0] = findViewById(R.id.player_card1);
 //        pc[1] = findViewById(R.id.player_card2);
