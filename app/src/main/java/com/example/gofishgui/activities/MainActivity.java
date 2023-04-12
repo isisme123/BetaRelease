@@ -322,6 +322,14 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else if(fish.getCurrentPlayer() == 2){
                     smartAI.smartAsk();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            TextView cardAsked = findViewById(R.id.cardAsked);
+                            valueChosen = fish.getComputerAsk();
+                            cardAsked.setText("AI asked for a: " + valueChosen);
+                        }
+                    });
                 }
 
 
