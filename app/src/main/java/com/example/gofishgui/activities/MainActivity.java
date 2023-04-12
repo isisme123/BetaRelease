@@ -292,7 +292,7 @@ public class MainActivity extends AppCompatActivity {
 
         private boolean isRunning;
         private Context context;
-        FishDumbAI dumbAI = new FishDumbAI(userHand, computerHand, deck);
+        FishSmartAI dumbAI = new FishSmartAI(userHand, computerHand, deck);
 
         @Override
         public void run() {
@@ -301,7 +301,7 @@ public class MainActivity extends AppCompatActivity {
             while (isRunning) {
 
                 if (fish.getCurrentPlayer() != 0) {
-                    smartAI.smartAsk();
+                    dumbAI.smartAsk();
                 }
                 //create intent for EndActivity (automatically)
                 if (fish.isGameOver() == true) {
@@ -311,6 +311,8 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
+
+
                 // Sleep for a short amount of time to limit the frame rate
                 try {
                     Thread.sleep(2000);
@@ -318,6 +320,8 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+
+
         }
 
         public void stop() {
