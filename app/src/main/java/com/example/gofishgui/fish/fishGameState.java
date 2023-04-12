@@ -34,13 +34,17 @@ public class fishGameState {
 //    }
 fishGameState() {
         currentPlayer = 0;
-        deck = null;
-        humanHand = null; //Map of the player ID to their hand of cards
-        computerHand = null;
+        //deck = null;
+        //humanHand = null; //Map of the player ID to their hand of cards
+        //computerHand = null;
         playerScore = 0;
         opponentScore = 0;
         gameOver = false;
-    }
+        humanHand = new ArrayList<>();
+        computerHand = new ArrayList<>();
+        deck = new ArrayList<>();
+
+}
 
     public fishGameState(fishGameState p) {
         this.deck = p.deck;
@@ -75,17 +79,13 @@ fishGameState() {
 //    public boolean isGamerOver() {
 //        return gameOver;
 //    }
-//public boolean isGameOver() {
-//    if (deck.isEmpty() && humanHand.isEmpty() && computerHand.isEmpty()) {
-//        //return true;
-//        if (playerScore > opponentScore || playerScore == opponentScore) {
-//            return true;
-//        }
-//    } else {
-//        return false;
-//    }
-//    return true;
-//}
+public boolean isGameOver() {
+    if (deck.isEmpty() && humanHand.isEmpty() && computerHand.isEmpty()) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 
     public List<FishCard> getDeck() {
