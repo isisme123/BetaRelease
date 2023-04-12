@@ -11,6 +11,8 @@ public class fishGameState {
     public ArrayList<FishCard> deck;
     public ArrayList<FishCard> humanHand; //Map of the player ID to their hand of cards
     public ArrayList<FishCard> computerHand;
+
+    public int computerAsk;
     public ArrayList<Integer> priority = new ArrayList<>();
     public ArrayList<Integer> doNotAsk = new ArrayList<>();
 
@@ -131,6 +133,12 @@ public boolean isGameOver() {
 
     public void setOpponentScore(int opponentScore) {
         this.opponentScore = opponentScore;
+    }
+    public int getComputerAsk() {
+        return computerAsk;
+    }
+    public void setComputerAsk(int computerAsk) {
+        this.computerAsk = computerAsk;
     }
 
 }

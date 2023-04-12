@@ -310,10 +310,21 @@ public class MainActivity extends AppCompatActivity {
 
                 if (fish.getCurrentPlayer() == 1) {
                     dumbAI.dumbAsk();
+                    // Run on the UI thread to update the text view
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            TextView cardAsked = findViewById(R.id.cardAsked);
+                            valueChosen = fish.getComputerAsk();
+                            cardAsked.setText("AI asked for a: " + valueChosen);
+                        }
+                    });
                 }
                 else if(fish.getCurrentPlayer() == 2){
                     smartAI.smartAsk();
                 }
+
+
                 //create intent for EndActivity (automatically)
                 if (fish.isGameOver() == true) {
                     Intent intent = new Intent(MainActivity.this, EndActivity.class);

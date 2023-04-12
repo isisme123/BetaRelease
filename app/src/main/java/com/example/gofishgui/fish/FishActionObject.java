@@ -43,6 +43,7 @@ public class FishActionObject {
                 fish.doNotAsk.remove(integerToRemove);
             }
         } else {
+            fish.setComputerAsk(value);
             fish.doNotAsk.add(value);
         }
 
@@ -53,7 +54,6 @@ public class FishActionObject {
         }
         else {
             System.out.println("Go Fish!");
-            drawCard(playerIdx);
             fishActionObject.checkForFour(fish.humanHand, fish.computerHand, drawCard(playerIdx));
             fish.nextPlayer();
             return false;
