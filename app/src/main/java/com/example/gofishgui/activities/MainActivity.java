@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<FishCard> deck; // arraylist for the deck
     private fishGameState fish = fishGameState.getInstance(); //instance of fish game state
     private int pos;
-    int value = 0;
+    int valueChosen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         userHand = new ArrayList<>();
         computerHand = new ArrayList<>();
         deck = new ArrayList<>();
+        int value = 0;
 
             // (TEST), initializes a game, will put the following into startGame method later!!
             // image views for human cards array
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
             //show the card the AI asks
         TextView cardAsked = findViewById(R.id.cardAsked);
+        cardAsked.setText("AI asked for a: " + value);
 
             // populates button and imageview
             //pc[0] = findViewById(R.id.player_card1);
@@ -262,7 +264,28 @@ public class MainActivity extends AppCompatActivity {
                         endGame();
                     }
                 });
-            }
+
+//                cardAsked.setOnAskedListener(new OnAskedListener() {
+//                    public void onAsked(computerhand){
+//                        int value1 = dumbAI.getValue();
+//                        TextView cardAsked = findViewById(R.id.cardAsked);
+//                        cardAsked.setText("AI asked: " + value1);
+//                    }
+//                });
+        //TextView cardAsked = findViewById(R.id.cardAsked);
+//        runOnUiThread(new Runnable(){
+//            @Override
+//            public void run() {
+//                FishDumbAI dumbAI = new FishDumbAI(userHand, computerHand, myDeck);
+//                for (FishCard card : computerHand) {
+//                    //System.out.print(card.getValue() + " ");
+//                    cardAsked.setText("AI asked for a: " + card.getValue());
+//                }
+//                //cardAsked.setText("AI asked for a: " + dumbAI.randomVal());
+//            }
+//        });
+
+    }
     //end of onCreate
 
     // End the game and switch to EndActivity using the endGame button
@@ -270,6 +293,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, EndActivity.class);
         startActivity(intent);
     }
+
 
     @Override
     protected void onStart() {
@@ -299,6 +323,7 @@ public class MainActivity extends AppCompatActivity {
         private boolean isRunning;
         private Context context;
         FishDumbAI dumbAI = new FishDumbAI(userHand, computerHand, deck);
+        FishSmartAI smartAI = new FishSmartAI(userHand, computerHand, deck);
 
         @Override
         public void run() {
@@ -306,9 +331,24 @@ public class MainActivity extends AppCompatActivity {
 
             while (isRunning) {
 
-                if (fish.getCurrentPlayer() != 0) {
+                if (fish.getCurrentPlayer() == 1) {
+                    dumbAI.dumbAsk();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            TextView cardAsked = findViewById(R.id.cardAsked);
+                            //valueChosen = dumbAI.randomVal();
+                            valueChosen = computerHand.indexOf(dumbAI.randomVal());
+                            cardAsked.setText("AI asked for a: " + valueChosen);
+                        }
+                    });
+                }
+                else if (fish.getCurrentPlayer() == 2){
                     smartAI.smartAsk();
                 }
+//                TextView cardAsked = findViewById(R.id.cardAsked);
+//                valueChosen = dumbAI.randomVal();
+//                cardAsked.setText("AI asked for a: " + valueChosen);
 
                 //create intent for EndActivity (automatically)
                 if (fish.isGameOver() == true) {
@@ -330,17 +370,6 @@ public class MainActivity extends AppCompatActivity {
         public void stop() {
             isRunning = false;
         }
-//        public void update() {
-//            //fish.update();
-//            FishActionObject fishActionObject = new FishActionObject(userHand, computerHand, deck);
-//            fishActionObject.isGameOver();
-//            if(fishActionObject.isGameOver()) {
-//                Intent intent = new Intent(MainActivity.this, EndActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        }
-
     }
 
     // Helper method that updates the images on the cards

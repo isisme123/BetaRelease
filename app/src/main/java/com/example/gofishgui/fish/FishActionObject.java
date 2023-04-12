@@ -60,22 +60,6 @@ public class FishActionObject {
         }
     }
 
-//    public FishCard drawCard(int playerIdx) {
-//
-//        FishCard card;
-//        if (deck != null) {
-//            card = deck.remove(0);
-//        } else {
-//            return null;
-//        }
-//
-//        if (playerIdx == 0) {
-//            fish.humanHand.add(card);
-//        } else {
-//            fish.computerHand.add(card);
-//        }
-//        return card;
-//    }
     public int drawCard(int playerIdx) {
         FishCard card = null;
         if (!deck.isEmpty()) {
@@ -124,16 +108,6 @@ public class FishActionObject {
             otherHand.removeAll(cardsToRemove);
         }
     }
-//public boolean isGameOver() {
-//    if (deck.isEmpty() && currHand.isEmpty() && otherHand.isEmpty()) {
-//        //return true;
-//        if (fish.playerScore > fish.opponentScore || fish.playerScore == fish.opponentScore) {
-//            return true;
-//        }
-//    } else {
-//        return false;
-//    }
-//    return true;
-//}
+
 }
 

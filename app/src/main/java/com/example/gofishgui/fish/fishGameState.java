@@ -86,8 +86,6 @@ public boolean isGameOver() {
         return false;
     }
 }
-
-
     public List<FishCard> getDeck() {
         return deck;
     }

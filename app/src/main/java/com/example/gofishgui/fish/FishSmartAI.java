@@ -22,7 +22,7 @@ public class FishSmartAI {
     public void smartAsk() {
 
         value = getSmartVal();
-        fishActionObject.askForCard(value, 1);
+        fishActionObject.askForCard(value, 2);
         fishActionObject.checkForFour(fish.humanHand, fish.computerHand, value);
         //fish.isGameOver(); //call isGameOver
         System.out.println("Computer asked for a " + value);

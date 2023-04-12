@@ -35,11 +35,16 @@ public class FishDumbAI {
 
     public boolean dumbAsk() {
 
+        //This is for the index
         value = computerHand.indexOf(randomVal());
+        //THis is for the actual value.
+        //value = randomVal();
         fishActionObject.askForCard(value, 1);
         fishActionObject.checkForFour(fish.humanHand, fish.computerHand, value);
         //fish.isGameOver(); //call isGameOver
+
         System.out.println("Computer asked for a " + value);
+
         System.out.print("User hand after ask: ");
         for (FishCard card : humanHand) {
             System.out.print(card.getValue() + " ");
@@ -62,5 +67,4 @@ public class FishDumbAI {
 
         return true;
     }
-
 }
