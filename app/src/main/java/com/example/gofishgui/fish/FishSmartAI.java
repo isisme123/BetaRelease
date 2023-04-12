@@ -77,9 +77,13 @@ public class FishSmartAI {
             }
         }
 
+        ArrayList<Integer> intValues = new ArrayList<Integer>();
+        for (FishCard card : computerHand) {
+            intValues.add(card.getValue());
+        }
 
 
-        return computerHand.indexOf(1);
+        return intValues.get(0);
     }
 
 }

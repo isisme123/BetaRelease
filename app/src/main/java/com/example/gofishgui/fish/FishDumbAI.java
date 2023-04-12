@@ -29,17 +29,18 @@ public class FishDumbAI {
     //Random number generator for a value from 1-13
     public int randomVal() {
         Random rand = new Random();
-        int toRtn = rand.nextInt(13) +1;
+        int toRtn = rand.nextInt(fish.computerHand.size());
         return toRtn;
     }
 
     public boolean dumbAsk() {
 
-        //This is for the index
-        //value = fish.computerHand.;
-        value = randomVal();
-        //THis is for the actual value.
-        //value = randomVal();
+        ArrayList<Integer> intValues = new ArrayList<Integer>();
+        for (FishCard card : computerHand) {
+            intValues.add(card.getValue());
+        }
+
+        value = intValues.get(randomVal());
         fishActionObject.askForCard(value, 1);
         fishActionObject.checkForFour(fish.humanHand, fish.computerHand, value);
         //fish.isGameOver(); //call isGameOver
@@ -68,4 +69,5 @@ public class FishDumbAI {
 
         return true;
     }
+
 }
