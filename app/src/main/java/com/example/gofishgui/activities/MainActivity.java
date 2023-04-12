@@ -301,14 +301,17 @@ public class MainActivity extends AppCompatActivity {
         private boolean isRunning;
         private Context context;
         FishDumbAI dumbAI = new FishDumbAI(userHand, computerHand, deck);
-
+        FishSmartAI smartAI = new FishSmartAI(userHand, computerHand, deck);
         @Override
         public void run() {
             isRunning = true;
 
             while (isRunning) {
 
-                if (fish.getCurrentPlayer() != 0) {
+                if (fish.getCurrentPlayer() == 1) {
+                    dumbAI.dumbAsk();
+                }
+                else if(fish.getCurrentPlayer() == 2){
                     smartAI.smartAsk();
                 }
                 //create intent for EndActivity (automatically)
