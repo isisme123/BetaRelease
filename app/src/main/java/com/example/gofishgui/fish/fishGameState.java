@@ -132,4 +132,5 @@ public boolean isGameOver() {
     public void setOpponentScore(int opponentScore) {
         this.opponentScore = opponentScore;
     }
+
 }

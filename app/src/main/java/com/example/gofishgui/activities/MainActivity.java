@@ -337,8 +337,8 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             TextView cardAsked = findViewById(R.id.cardAsked);
-                            //valueChosen = dumbAI.randomVal();
-                            valueChosen = computerHand.indexOf(dumbAI.randomVal());
+                            valueChosen = dumbAI.randomVal();
+                            //valueChosen = computerHand.indexOf(dumbAI.randomVal());
                             cardAsked.setText("AI asked for a: " + valueChosen);
                         }
                     });

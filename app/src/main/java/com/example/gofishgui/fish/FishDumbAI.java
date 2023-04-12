@@ -29,14 +29,15 @@ public class FishDumbAI {
     //Random number generator for a value from 1-13
     public int randomVal() {
         Random rand = new Random();
-        int toRtn = rand.nextInt(computerHand.size()) + 1;
+        int toRtn = rand.nextInt(13) +1;
         return toRtn;
     }
 
     public boolean dumbAsk() {
 
         //This is for the index
-        value = computerHand.indexOf(randomVal());
+        //value = fish.computerHand.;
+        value = randomVal();
         //THis is for the actual value.
         //value = randomVal();
         fishActionObject.askForCard(value, 1);
