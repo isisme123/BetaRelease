@@ -15,7 +15,6 @@ public class FishActionObject {
     private fishGameState fish = fishGameState.getInstance();
 
 
-
     // constructor
     public FishActionObject(ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand, ArrayList<FishCard> deck) {
         this.currHand = currHand;
@@ -26,6 +25,7 @@ public class FishActionObject {
     // askforcard method
     public boolean askForCard(int value, int playerIdx) {
         ArrayList<FishCard> cardsToRemove = new ArrayList<>();
+        FishActionObject fishActionObject = new FishActionObject(fish.humanHand, fish.computerHand, fish.deck);
         boolean hasCard = false;
         for (FishCard card : otherHand) {
             if (card.getValue() == value) {
@@ -34,13 +34,27 @@ public class FishActionObject {
                 hasCard = true;
             }
         }
+        if (playerIdx == 0) {
+            if (!(fish.priority.contains(value))) {
+                fish.priority.add(value);
+            }
+            if (fish.doNotAsk.contains(value)) {
+                Integer integerToRemove = value;
+                fish.doNotAsk.remove(integerToRemove);
+            }
+        } else {
+            fish.doNotAsk.add(value);
+        }
+
         if (hasCard == true) {
             otherHand.removeAll(cardsToRemove);
+            fishActionObject.checkForFour(fish.humanHand, fish.computerHand, value);
             return true;
         }
         else {
             System.out.println("Go Fish!");
             drawCard(playerIdx);
+            fishActionObject.checkForFour(fish.humanHand, fish.computerHand, drawCard(playerIdx));
             fish.nextPlayer();
             return false;
         }
@@ -62,17 +76,17 @@ public class FishActionObject {
 //        }
 //        return card;
 //    }
-    public FishCard drawCard(int playerIdx) {
+    public int drawCard(int playerIdx) {
         FishCard card = null;
         if (!deck.isEmpty()) {
-        card = deck.remove(0);
-        if (playerIdx == 0) {
-            fish.humanHand.add(card);
-        } else {
-            fish.computerHand.add(card);
+            card = deck.remove(0);
+            if (playerIdx == 0) {
+                fish.humanHand.add(card);
+            } else {
+                fish.computerHand.add(card);
+            }
         }
-        }
-        return card;
+        return card.getValue();
     }
 
     public void checkForFour(ArrayList<FishCard> currHand, ArrayList<FishCard> otherHand, int value) {

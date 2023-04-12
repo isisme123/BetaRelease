@@ -1,5 +1,8 @@
 package com.example.gofishgui.fish;
 
+import android.widget.TextView;
+
+import com.example.gofishgui.R;
 import com.example.gofishgui.activities.MainActivity;
 
 import java.util.ArrayList;
@@ -22,33 +25,21 @@ public class FishDumbAI {
         //this.fish = new fishGameState();
 
     }
-    public interface OnAskListener{
-        void onAsk(int value);
-    }
-    private OnAskListener listener;
-    public void setOnAskListener(OnAskListener listener) {
-        this.listener = listener;
-    }
 
     //Random number generator for a value from 1-13
     public int randomVal() {
         Random rand = new Random();
-        int toRtn = rand.nextInt(13) + 1;
+        int toRtn = rand.nextInt(computerHand.size()) + 1;
         return toRtn;
     }
 
     public boolean dumbAsk() {
 
-        value = randomVal();
+        value = computerHand.indexOf(randomVal());
         fishActionObject.askForCard(value, 1);
         fishActionObject.checkForFour(fish.humanHand, fish.computerHand, value);
         //fish.isGameOver(); //call isGameOver
-
-        // Notify the listener that the AI has asked for a card.
-        if (listener != null) {
-            listener.onAsk(value);
-        }
-
+        System.out.println("Computer asked for a " + value);
         System.out.print("User hand after ask: ");
         for (FishCard card : humanHand) {
             System.out.print(card.getValue() + " ");

@@ -20,7 +20,7 @@ import com.example.gofishgui.fish.FishActionObject;
 import com.example.gofishgui.fish.FishCard;
 import com.example.gofishgui.fish.FishDeck;
 import com.example.gofishgui.fish.FishDumbAI;
-import com.example.gofishgui.fish.FishHand;
+import com.example.gofishgui.fish.FishSmartAI;
 import com.example.gofishgui.fish.fishGameState;
 
 import java.util.ArrayList;
@@ -222,32 +222,37 @@ public class MainActivity extends AppCompatActivity {
                         player.setText("Player Score: " + humanScore);
                         opponent.setText("Opponent Score: " + computerScore);
 
-                        // (TEST) SOP hands after asking for a card
-                        System.out.print("Current hand after ask: ");
-                        for (FishCard card : humanHand) {
-                            System.out.print(card.getValue() + " ");
-                        }
-                        System.out.println(" ");
-                        System.out.print("Other hand after ask: ");
-                        for (FishCard card : computerHand) {
-                            System.out.print(card.getValue() + " ");
-                        }
-                        System.out.println(" ");
-                        System.out.print("Deck after ask: ");
-                        for (FishCard card : myDeck) {
-                            System.out.print(card.getValue() + " ");
-                        }
-                        System.out.println(" ");
-                        fish.setHumanHand(humanHand); //updates the humanHand in fishGameState
-                        fish.setComputerHand(computerHand);
-                        ; //updates the computerHand in fishGameState
-                        fish.setDeck(myDeck); //updates the deck in fishGameState
-                        fish.setPlayerScore(fish.getPlayerScore());
-                        fish.setOpponentScore(fish.getOpponentScore());
-                    }
-                });
-                // Find the endgamebutton view
-                Button endgamebutton = findViewById(R.id.endGameButton);
+                // (TEST) SOP hands after asking for a card
+                System.out.print("Current hand after ask: ");
+                for (FishCard card : humanHand) {
+                    System.out.print(card.getValue() + " ");
+                }
+                System.out.println(" ");
+                System.out.print("Other hand after ask: ");
+                for (FishCard card : computerHand) {
+                    System.out.print(card.getValue() + " ");
+                }
+                System.out.println(" ");
+                System.out.print("Deck after ask: ");
+                for (FishCard card : myDeck) {
+                    System.out.print(card.getValue() + " ");
+                }
+                System.out.println(" ");
+                fish.setHumanHand(humanHand); //updates the humanHand in fishGameState
+                fish.setComputerHand(computerHand);; //updates the computerHand in fishGameState
+                fish.setDeck(myDeck); //updates the deck in fishGameState
+                fish.setPlayerScore(fish.getPlayerScore());
+                fish.setOpponentScore(fish.getOpponentScore());
+                TextView cardZ = (TextView) findViewById(R.id.textView);
+                String cardSet = "";
+                for(int i = 0; i < fish.humanHand.size(); ++i) {
+                    cardSet = cardSet + fish.humanHand.get(i).getValue() + ", ";
+                }
+                cardZ.setText(cardSet);
+            }
+        });
+        // Find the endgamebutton view
+        Button endgamebutton = findViewById(R.id.endGameButton);
 
                 // Set OnClickListener to endgamebutton
                 endgamebutton.setOnClickListener(new View.OnClickListener() {
@@ -302,7 +307,7 @@ public class MainActivity extends AppCompatActivity {
             while (isRunning) {
 
                 if (fish.getCurrentPlayer() != 0) {
-                    dumbAI.dumbAsk();
+                    smartAI.smartAsk();
                 }
 
                 //create intent for EndActivity (automatically)
@@ -325,6 +330,16 @@ public class MainActivity extends AppCompatActivity {
         public void stop() {
             isRunning = false;
         }
+//        public void update() {
+//            //fish.update();
+//            FishActionObject fishActionObject = new FishActionObject(userHand, computerHand, deck);
+//            fishActionObject.isGameOver();
+//            if(fishActionObject.isGameOver()) {
+//                Intent intent = new Intent(MainActivity.this, EndActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        }
 
     }
 

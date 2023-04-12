@@ -11,6 +11,9 @@ public class fishGameState {
     public ArrayList<FishCard> deck;
     public ArrayList<FishCard> humanHand; //Map of the player ID to their hand of cards
     public ArrayList<FishCard> computerHand;
+    public ArrayList<Integer> priority = new ArrayList<>();
+    public ArrayList<Integer> doNotAsk = new ArrayList<>();
+
     //private Map<Integer, Integer> playerScores; // ..scores?!
     public int playerScore;
     public int opponentScore;
