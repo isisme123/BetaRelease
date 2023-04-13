@@ -70,6 +70,8 @@ public class EndActivity extends AppCompatActivity {
         resetButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fish.setPlayerScore(0);
+                fish.setOpponentScore(0);
                 Intent intent = new Intent(EndActivity.this, StartActivity.class);
                 startActivity(intent);
             }

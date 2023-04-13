@@ -273,8 +273,11 @@ public class MainActivity extends AppCompatActivity {
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fish.setPlayerScore(0);
+                fish.setOpponentScore(0);
                 Intent intent = new Intent(MainActivity.this, StartActivity.class);
                 startActivity(intent);
+
             }
         });
 
