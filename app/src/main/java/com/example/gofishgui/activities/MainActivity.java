@@ -326,6 +326,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                             cardZ.setText(cardSet);
                         }
+
                     });
                 } else if (fish.getCurrentPlayer() == 2) {
                     smartAI.smartAsk();
