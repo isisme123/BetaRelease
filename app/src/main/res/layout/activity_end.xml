@@ -13,7 +13,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="152dp"
         android:layout_marginEnd="100dp"
-        android:layout_marginBottom="560dp"
+        android:layout_marginBottom="260dp"
         android:text="TextView"
         android:textColor="#009688"
         android:textSize="96sp"
@@ -22,4 +22,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/resetButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Reset Button"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

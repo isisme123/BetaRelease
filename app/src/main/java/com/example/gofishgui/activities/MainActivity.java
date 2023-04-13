@@ -24,6 +24,9 @@ import com.example.gofishgui.fish.FishSmartAI;
 import com.example.gofishgui.fish.fishGameState;
 
 import java.util.ArrayList;
+/*The code works to completion. There is no known bugs. Both dumb and smart AIs work.
+The only part that is not added to this version of the  game is the game is the game
+framework. It should be added by the final release.*/
 
 public class MainActivity extends AppCompatActivity {
 

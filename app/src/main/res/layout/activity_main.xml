@@ -171,23 +171,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="start"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/resetButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="100dp"
-            android:layout_weight="0"
+            android:layout_marginRight="150dp"
+            android:layout_weight="1"
             android:text="Reset Game" />
 
         <Button
             android:id="@+id/endGameButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_marginLeft="100dp"
-            android:layout_weight="0"
+            android:layout_marginLeft="150dp"
+            android:layout_weight="1"
             android:text="End Game" />
 
     </LinearLayout>
