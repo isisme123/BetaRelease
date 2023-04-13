@@ -59,15 +59,16 @@ public class FishActionObject {
             return false;
         }
     }
-
     public int drawCard(int playerIdx) {
         FishCard card = null;
         if (!deck.isEmpty()) {
             card = deck.remove(0);
             if (playerIdx == 0) {
                 fish.humanHand.add(card);
+                checkForFour(fish.humanHand, fish.computerHand, card.getValue());
             } else {
                 fish.computerHand.add(card);
+                checkForFour(fish.computerHand, fish.humanHand, card.getValue());
             }
         }
         return card.getValue();
@@ -108,6 +109,5 @@ public class FishActionObject {
             otherHand.removeAll(cardsToRemove);
         }
     }
-
 }
 

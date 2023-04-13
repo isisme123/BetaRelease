@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.gofishgui.R;
+import com.example.gofishgui.fish.fishGameState;
 
 public class EndActivity extends AppCompatActivity {
 
@@ -14,16 +15,22 @@ public class EndActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end);
+
         // Get the scores from the previous activity
-        Intent intent = getIntent();
-        int player1Score = intent.getIntExtra("PLAYER_1_SCORE", 0);
-        int player2Score = intent.getIntExtra("PLAYER_2_SCORE", 1);
+        fishGameState fish = fishGameState.getInstance(); //instance of fish game state
+        int humanScore = fish.getPlayerScore();
+        int computerScore = fish.getOpponentScore();
+
+//        Intent intent = getIntent();
+//        int humanPlayerScore = intent.getIntExtra("Human player score", 0);
+//        int dumbAiScore = intent.getIntExtra("Dumb AI score", 1);
+//        int smartAiScore = intent.getIntExtra("Smart AI score", 2);
 
         // Determine the winner
         String winner;
-        if (player1Score > player2Score) {
-            winner = "Player 1";
-        } else if (player2Score > player1Score) {
+        if (humanScore > computerScore) {
+            winner = "You";
+        } else if (computerScore > humanScore){
             winner = "AI";
         } else {
             winner = "It's a tie!";

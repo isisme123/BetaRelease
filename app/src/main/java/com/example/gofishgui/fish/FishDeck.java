@@ -9,13 +9,23 @@ public class FishDeck {
     private ArrayList<FishCard> humanHand;
     private ArrayList<FishCard> computerHand;
     private fishGameState fish = fishGameState.getInstance();
+    String rank;
+    int value;
+    private FishCard fishCard;
+
+    //create an instance of fishActionObject class
+    FishActionObject fishActionObject;
 
 
     public FishDeck(ArrayList<FishCard> deck) {
         this.deck = deck;
         humanHand = new ArrayList<FishCard>();
         computerHand = new ArrayList<FishCard>();
-        //this.fish = new fishGameState();
+        fishCard = new FishCard(rank,value);
+
+        //initiate fishActionObject
+        fishActionObject = new FishActionObject(fish.computerHand, fish.humanHand, fish.deck);
+
         // Add cards to the deck
         for (int i = 1; i <= 13; i++) {
             FishCard heartCard = new FishCard("hearts", i);
@@ -47,6 +57,7 @@ public class FishDeck {
             humanHand.add(deck.remove(0));
             computerHand.add(deck.remove(0));
         }
+            fishActionObject.checkForFour(humanHand, computerHand, fishCard.getValue());
     }
 
     public ArrayList<FishCard> getDeck() { return deck; }
@@ -54,6 +65,5 @@ public class FishDeck {
     public ArrayList<FishCard> getHumanHand() { return humanHand; }
 
     public ArrayList<FishCard> getComputerHand() { return computerHand; }
-
 
 }

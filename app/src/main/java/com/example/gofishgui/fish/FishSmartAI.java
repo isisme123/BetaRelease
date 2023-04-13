@@ -1,6 +1,7 @@
 package com.example.gofishgui.fish;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class FishSmartAI {
 
@@ -76,13 +77,15 @@ public class FishSmartAI {
                 return value;
             }
         }
-
         ArrayList<Integer> intValues = new ArrayList<Integer>();
         for (FishCard card : computerHand) {
             intValues.add(card.getValue());
         }
-
-
+        for (FishCard card : computerHand){
+            if (fish.computerHand.size() == 0) {
+                return -1; // or some other default value
+            }
+        }
         return intValues.get(0);
     }
 

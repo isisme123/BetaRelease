@@ -20,25 +20,9 @@ public class fishGameState {
     public int playerScore;
     public int opponentScore;
     public boolean gameOver;
-    //private FishDeck deck;
 
-//    public fishGameState(int currentPlayer, List<FishCard> deck, List<FishCard> humanHand, List<FishCard> computerHand,
-//                         int playerScore, int opponentScore, boolean gameOver) {
-//
-//        this.deck = deck;
-//        this.humanHand = humanHand;
-//        this.computerHand = computerHand;
-//        this.currentPlayer = currentPlayer;
-//        this.playerScore = playerScore;
-//        this.opponentScore = opponentScore;
-//        this.gameOver = gameOver;
-//
-//    }
-fishGameState() {
+    fishGameState() {
         currentPlayer = 0;
-        //deck = null;
-        //humanHand = null; //Map of the player ID to their hand of cards
-        //computerHand = null;
         playerScore = 0;
         opponentScore = 0;
         gameOver = false;
@@ -46,7 +30,7 @@ fishGameState() {
         computerHand = new ArrayList<>();
         deck = new ArrayList<>();
 
-}
+    }
 
     public fishGameState(fishGameState p) {
         this.deck = p.deck;
@@ -70,24 +54,21 @@ fishGameState() {
     }
 
     public void nextPlayer() {
-        if(getCurrentPlayer() == 0) {
+        if (getCurrentPlayer() == 0) {
             setCurrentPlayer(1);
-        }
-        else {
+        } else {
             setCurrentPlayer(0);
         }
     }
 
-//    public boolean isGamerOver() {
-//        return gameOver;
-//    }
-public boolean isGameOver() {
-    if (deck.isEmpty() && humanHand.isEmpty() && computerHand.isEmpty()) {
-        return true;
-    } else {
-        return false;
+    public boolean isGameOver() {
+        if (humanHand.isEmpty() || computerHand.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
     }
-}
+
     public List<FishCard> getDeck() {
         return deck;
     }
@@ -111,6 +92,7 @@ public boolean isGameOver() {
     public int getOpponentScore() {
         return opponentScore;
     }
+
     public void setCurrentPlayer(int currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
@@ -134,9 +116,11 @@ public boolean isGameOver() {
     public void setOpponentScore(int opponentScore) {
         this.opponentScore = opponentScore;
     }
+
     public int getComputerAsk() {
         return computerAsk;
     }
+
     public void setComputerAsk(int computerAsk) {
         this.computerAsk = computerAsk;
     }

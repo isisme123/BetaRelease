@@ -27,11 +27,23 @@ public class FishDumbAI {
     }
 
     //Random number generator for a value from 1-13
+//    public int randomVal() {
+//        Random rand = new Random();
+//        int toRtn = rand.nextInt(fish.computerHand.size());
+//        if(fish.computerHand.size() == 0){
+//
+//        }
+//        return toRtn;
+//    }
+    //Random number generator for a value from 1-13
     public int randomVal() {
+        if (fish.computerHand.size() == 0) {
+            return -1; // or some other default value
+        }
         Random rand = new Random();
-        int toRtn = rand.nextInt(fish.computerHand.size());
-        return toRtn;
+        return rand.nextInt(fish.computerHand.size());
     }
+
 
     public boolean dumbAsk() {
 
