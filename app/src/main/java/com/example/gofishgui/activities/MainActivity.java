@@ -319,6 +319,12 @@ public class MainActivity extends AppCompatActivity {
                             TextView cardAsked = findViewById(R.id.cardAsked);
                             valueChosen = fish.getComputerAsk();
                             cardAsked.setText("AI asked for a: " + valueChosen);
+                            TextView cardZ = (TextView) findViewById(R.id.textView);
+                            String cardSet = "";
+                            for(int i = 0; i < fish.humanHand.size(); ++i) {
+                                cardSet = cardSet + fish.humanHand.get(i).getValue() + ", ";
+                            }
+                            cardZ.setText(cardSet);
                         }
                     });
                 } else if (fish.getCurrentPlayer() == 2) {
@@ -329,6 +335,12 @@ public class MainActivity extends AppCompatActivity {
                             TextView cardAsked = findViewById(R.id.cardAsked);
                             valueChosen = fish.getComputerAsk();
                             cardAsked.setText("AI asked for a: " + valueChosen);
+                            TextView cardZ = (TextView) findViewById(R.id.textView);
+                            String cardSet = "";
+                            for(int i = 0; i < fish.humanHand.size(); ++i) {
+                                cardSet = cardSet + fish.humanHand.get(i).getValue() + ", ";
+                            }
+                            cardZ.setText(cardSet);
                         }
                     });
                 }
