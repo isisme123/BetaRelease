@@ -2,15 +2,27 @@ package com.example.gofishgui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.TextView;
 
 import com.example.gofishgui.R;
 import com.example.gofishgui.fish.fishGameState;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class EndActivity extends AppCompatActivity {
 
+    private Handler handler;
+    private TextView winnerMessageTextView;
+    private int currentColorIndex;
+    private List<Integer> colorList;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,11 +32,6 @@ public class EndActivity extends AppCompatActivity {
         fishGameState fish = fishGameState.getInstance(); //instance of fish game state
         int humanScore = fish.getPlayerScore();
         int computerScore = fish.getOpponentScore();
-
-//        Intent intent = getIntent();
-//        int humanPlayerScore = intent.getIntExtra("Human player score", 0);
-//        int dumbAiScore = intent.getIntExtra("Dumb AI score", 1);
-//        int smartAiScore = intent.getIntExtra("Smart AI score", 2);
 
         // Determine the winner
         String winner;
@@ -37,8 +44,30 @@ public class EndActivity extends AppCompatActivity {
         }
 
         // Display the winner message
-        TextView winnerMessageTextView = findViewById(R.id.whoOne);
+        winnerMessageTextView = findViewById(R.id.winner);
         String winnerMessage = "The winner is: " +  winner;
         winnerMessageTextView.setText(winnerMessage);
+
+        // Set up the handler to change the text color every 500ms
+        colorList = new ArrayList<>(Arrays.asList(Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.MAGENTA));
+        currentColorIndex = 0;
+        handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int newColorIndex = (currentColorIndex + 1) % colorList.size();
+                winnerMessageTextView.setTextColor(colorList.get(newColorIndex));
+                currentColorIndex = newColorIndex;
+                handler.postDelayed(this, 500);
+            }
+        }, 500);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Remove any scheduled tasks from the handler to prevent memory leaks
+        handler.removeCallbacksAndMessages(null);
     }
 }
+

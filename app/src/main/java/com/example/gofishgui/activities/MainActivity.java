@@ -265,8 +265,17 @@ public class MainActivity extends AppCompatActivity {
                 endGame();
             }
         });
-    }
-    //end of onCreate
+
+        Button resetButton = findViewById(R.id.resetButton);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, StartActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }//end of onCreate
 
     // End the game and switch to EndActivity using the endGame button
     private void endGame() {

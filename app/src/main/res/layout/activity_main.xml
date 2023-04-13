@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#00BCD4"
     android:orientation="vertical"
-    android:paddingTop="5sp"
-    android:background="#0a6c03">
+    android:paddingTop="5sp">
 
     <!-- The deck of cards in the middle -->
 
@@ -168,19 +169,27 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/TheEnd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:gravity="end"
         android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/resetButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="100dp"
+            android:layout_weight="0"
+            android:text="Reset Game" />
 
         <Button
             android:id="@+id/endGameButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginLeft="100dp"
             android:layout_weight="0"
             android:text="End Game" />
+
     </LinearLayout>
 
     <!-- The opponent's hand at the top -->

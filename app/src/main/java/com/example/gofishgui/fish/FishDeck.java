@@ -65,5 +65,4 @@ public class FishDeck {
     public ArrayList<FishCard> getHumanHand() { return humanHand; }
 
     public ArrayList<FishCard> getComputerHand() { return computerHand; }
-
 }
